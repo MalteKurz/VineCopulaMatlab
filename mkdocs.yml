@@ -1,0 +1,35 @@
+site_name: VineCPP
+pages:
+- ['index.md', 'Home']
+
+- ['installVineCPP.md', 'Getting started', 'Installation']
+- ['DemoVineCPP.md', 'Getting started', 'Demo']
+- ['SetSeedVineCPP.md', 'Getting started', 'SetSeedVineCPP']
+
+- ['Functions/PairCopulaAIC.md', 'Functions for pair-copulas', 'PairCopulaAIC']
+- ['Functions/PairCopulaCDF.md', 'Functions for pair-copulas', 'PairCopulaCDF']
+- ['Functions/PairCopulaFit.md', 'Functions for pair-copulas', 'PairCopulaFit']
+- ['Functions/PairCopulaHfun.md', 'Functions for pair-copulas', 'PairCopulaHfun']
+- ['Functions/PairCopulaHVolume.md', 'Functions for pair-copulas', 'PairCopulaHVolume']
+- ['Functions/PairCopulaIndepTest.md', 'Functions for pair-copulas', 'PairCopulaIndepTest']
+- ['Functions/PairCopulaInvHfun.md', 'Functions for pair-copulas', 'PairCopulaInvHfun']
+- ['Functions/PairCopulaInvVfun.md', 'Functions for pair-copulas', 'PairCopulaInvVfun']
+- ['Functions/PairCopulaKendallTau.md', 'Functions for pair-copulas', 'PairCopulaKendallTau']
+- ['Functions/PairCopulaParameterBounds.md', 'Functions for pair-copulas', 'PairCopulaParameterBounds']
+- ['Functions/PairCopulaRand.md', 'Functions for pair-copulas', 'PairCopulaRand']
+- ['Functions/PairCopulaSelect.md', 'Functions for pair-copulas', 'PairCopulaSelect']
+- ['Functions/PairCopulaVfun.md', 'Functions for pair-copulas', 'PairCopulaVfun']
+- ['Functions/SetGlobalPairCopulaParameterBounds.md', 'Functions for pair-copulas', 'SetGlobalPairCopulaParameterBounds']
+
+- ['Functions/VineCopulaFit.md', 'Functions for vine copula', 'VineCopulaFit']
+- ['Functions/VineCopulaNegLL.md', 'Functions for vine copula', 'VineCopulaNegLL']
+- ['Functions/VineCopulaRand.md', 'Functions for vine copula', 'VineCopulaRand']
+
+- ['Functions/VineCopula.md', 'The VineCopula class', 'VineCopula class']
+- ['Functions/VineCopula_Constructor.md', 'The VineCopula class', 'Constructor']
+- ['Functions/VineCopula_Fit.md', 'The VineCopula class', 'Fit']
+- ['Functions/VineCopula_SeqTestOnSimplified.md', 'The VineCopula class', 'SeqTestOnSimplified']
+- ['Functions/VineCopula_Sim.md', 'The VineCopula class', 'Sim']
+- ['Functions/VineCopula_StructureSelect.md', 'The VineCopula class', 'StructureSelect']
+
+
