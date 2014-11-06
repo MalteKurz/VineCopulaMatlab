@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        
+        
+        <link rel="shortcut icon" href="../../img/favicon.ico">
+
+        <title>SeqTestOnSimplified - VineCPP</title>
+
+        <link href="../../css/bootstrap-custom.min.css" rel="stylesheet">
+        <link href="../../css/font-awesome-4.0.3.css" rel="stylesheet">
+        <link href="../../css/prettify-1.0.css" rel="stylesheet">
+        <link href="../../css/base.css" rel="stylesheet">
+
+        <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!--[if lt IE 9]>
+            <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+            <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+        <![endif]-->
+
+        
+    </head>
+
+    <body>
+
+        <div class="navbar navbar-default navbar-fixed-top" role="navigation">
+    <div class="container">
+
+        <!-- Collapsed navigation -->
+        <div class="navbar-header">
+            
+            <!-- Expander button -->
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            
+
+            <!-- Main title -->
+            <a class="navbar-brand" href="../..">VineCPP</a>
+        </div>
+
+        <!-- Expanded navigation -->
+        <div class="navbar-collapse collapse">
+            
+                <!-- Main navigation -->
+                <ul class="nav navbar-nav">
+                
+                
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Getting started <b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                        
+                            <li >
+                                <a href="../../installVineCPP">Installation</a>
+                            </li>
+                        
+                            <li >
+                                <a href="../../DemoVineCPP">Demo</a>
+                            </li>
+                        
+                            <li >
+                                <a href="../../SetSeedVineCPP">SetSeedVineCPP</a>
+                            </li>
+                        
+                        </ul>
+                    </li>
+                
+                
+                
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Functions for pair-copulas <b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                        
+                            <li >
+                                <a href="../PairCopulaAIC">PairCopulaAIC</a>
+                            </li>
+                        
+                            <li >
+                                <a href="../PairCopulaCDF">PairCopulaCDF</a>
+                            </li>
+                        
+                            <li >
+                                <a href="../PairCopulaFit">PairCopulaFit</a>
+                            </li>
+                        
+                            <li >
+                                <a href="../PairCopulaHfun">PairCopulaHfun</a>
+                            </li>
+                        
+                            <li >
+                                <a href="../PairCopulaHVolume">PairCopulaHVolume</a>
+                            </li>
+                        
+                            <li >
+                                <a href="../PairCopulaIndepTest">PairCopulaIndepTest</a>
+                            </li>
+                        
+                            <li >
+                                <a href="../PairCopulaInvHfun">PairCopulaInvHfun</a>
+                            </li>
+                        
+                            <li >
+                                <a href="../PairCopulaInvVfun">PairCopulaInvVfun</a>
+                            </li>
+                        
+                            <li >
+                                <a href="../PairCopulaKendallTau">PairCopulaKendallTau</a>
+                            </li>
+                        
+                            <li >
+                                <a href="../PairCopulaParameterBounds">PairCopulaParameterBounds</a>
+                            </li>
+                        
+                            <li >
+                                <a href="../PairCopulaRand">PairCopulaRand</a>
+                            </li>
+                        
+                            <li >
+                                <a href="../PairCopulaSelect">PairCopulaSelect</a>
+                            </li>
+                        
+                            <li >
+                                <a href="../PairCopulaVfun">PairCopulaVfun</a>
+                            </li>
+                        
+                            <li >
+                                <a href="../SetGlobalPairCopulaParameterBounds">SetGlobalPairCopulaParameterBounds</a>
+                            </li>
+                        
+                        </ul>
+                    </li>
+                
+                
+                
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Functions for vine copula <b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                        
+                            <li >
+                                <a href="../VineCopulaFit">VineCopulaFit</a>
+                            </li>
+                        
+                            <li >
+                                <a href="../VineCopulaNegLL">VineCopulaNegLL</a>
+                            </li>
+                        
+                            <li >
+                                <a href="../VineCopulaRand">VineCopulaRand</a>
+                            </li>
+                        
+                        </ul>
+                    </li>
+                
+                
+                
+                    <li class="dropdown active">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">The VineCopula class <b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                        
+                            <li >
+                                <a href="../VineCopula">VineCopula class</a>
+                            </li>
+                        
+                            <li >
+                                <a href="../VineCopula_Constructor">Constructor</a>
+                            </li>
+                        
+                            <li >
+                                <a href="../VineCopula_Fit">Fit</a>
+                            </li>
+                        
+                            <li class="active">
+                                <a href=".">SeqTestOnSimplified</a>
+                            </li>
+                        
+                            <li >
+                                <a href="../VineCopula_Sim">Sim</a>
+                            </li>
+                        
+                            <li >
+                                <a href="../VineCopula_StructureSelect">StructureSelect</a>
+                            </li>
+                        
+                        </ul>
+                    </li>
+                
+                
+                </ul>
+            
+
+            
+            <!-- Search, Navigation and Repo links -->
+            <ul class="nav navbar-nav navbar-right">
+                
+                
+                <li >
+                    <a rel="next" href="../VineCopula_Fit">
+                        <i class="fa fa-arrow-left"></i> Previous
+                    </a>
+                </li>
+                <li >
+                    <a rel="prev" href="../VineCopula_Sim">
+                        Next <i class="fa fa-arrow-right"></i>
+                    </a>
+                </li>
+                
+                
+            </ul>
+            
+        </div>
+    </div>
+</div>
+
+        <div class="container">
+            <div class="col-md-3"><div class="bs-sidebar hidden-print affix well" role="complementary">
+    <ul class="nav bs-sidenav">
+    
+        <li class="main active"><a href="#seqtestonsimplified-vinecopulaobject">SeqTestOnSimplified (VineCopulaObject)</a></li>
+        
+            <li><a href="#purpose">Purpose</a></li>
+        
+            <li><a href="#usage">Usage</a></li>
+        
+            <li><a href="#inputs">Inputs</a></li>
+        
+            <li><a href="#outputs">Outputs</a></li>
+        
+    
+    </ul>
+</div></div>
+            <div class="col-md-9" role="main">
+
+<h1 id="seqtestonsimplified-vinecopulaobject">SeqTestOnSimplified (VineCopulaObject)</h1>
+<p>Sequentially testing the simplified assumption for vine copulas</p>
+<hr />
+<h2 id="purpose">Purpose</h2>
+<p>The function can be used to sequentially test the
+        simplifying assumption for vine copulas. The procedure
+        heavily relies on a stochastic representation of the
+        simplifying assumption stated in Spanhel and Kurz
+        (2014). The stochastic representation allows to test
+        the simplifying assumption by using tests on vectorial
+        independencies. Note, that the performed tests are 
+        always based on the assumption that one is able to
+        observe (pseudo-)observations from the conditional
+        copulas that should be tested. Therefore, for
+        interpreting the test results for a specific tree of
+        the vine copula one needs to assume that the lower
+        trees (including the assumption of unconditional
+        copulas) are correctly specified.</p>
+<h2 id="usage">Usage</h2>
+<pre class="prettyprint well"><code>    Testing the simplifying assumption sequentially
+     [pVals,TestStats,BootTestStats] = SeqTestOnSimplified(VineCopulaObject,data,N)
+    Testing the simplifying assumption sequentially as
+    goodness-of-fit test (i.e., without reestimating the
+    whole vine copula for each tree)
+     [pVals,TestStats,BootTestStats] = SeqTestOnSimplified(VineCopulaObject,data,N,true)
+</code></pre>
+<h2 id="inputs">Inputs</h2>
+<pre class="prettyprint well"><code>    VineCopulaObject      = An object from the class
+                            VineCopula.
+    data                  = A (n x d) dimensional vector
+                            of values lying in [0,1] (the
+                            observations).
+    N                     = The number of boostrap
+                            replications for the
+                            multiplier bootstrap in the
+                            vectorial independence test.
+    GoF                   = A logical, which is by default
+                            false. Then, before the tests
+                            on vectorial independence are
+                            applied in each tree, the
+                            whole vine copula model is
+                            reestimated up to this tree
+                            and then the tests are
+                            performed. Otherwise, i.e., if
+                            it is applied as a goodness-
+                            of-fit test, the joint
+                            estimates given as inputs
+                            through the VineCopula object
+                            are used to obtain the
+                            (pseudo-)observations in each
+                            tree (without re-estimation).
+</code></pre>
+<h2 id="outputs">Outputs</h2>
+<pre class="prettyprint well"><code>    pVal                  = A vector of p-values of the
+                            vectorial independence tests. 
+                            Every entry corresponds to one
+                            specific copula being part
+                            of the whole vine copula.
+    TestStat              = A vector of realized values
+                            for the test statistics.
+                            of the whole vine copula.
+    BootTestStats         = A matrix of realized values
+                            for the bootstrapped test
+                            statistics.
+</code></pre>
+</div>
+        </div>
+
+        <footer class="col-md-12">
+            <hr>
+            
+            <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a>.</p>
+        </footer>
+
+        
+
+        <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
+        <script src="../../js/bootstrap-3.0.3.min.js"></script>
+        <script src="../../js/prettify-1.0.min.js"></script>
+        <script src="../../js/base.js"></script>
+    </body>
+</html>

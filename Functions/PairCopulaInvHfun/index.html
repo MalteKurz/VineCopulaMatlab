@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        
+        
+        <link rel="shortcut icon" href="../../img/favicon.ico">
+
+        <title>PairCopulaInvHfun - VineCPP</title>
+
+        <link href="../../css/bootstrap-custom.min.css" rel="stylesheet">
+        <link href="../../css/font-awesome-4.0.3.css" rel="stylesheet">
+        <link href="../../css/prettify-1.0.css" rel="stylesheet">
+        <link href="../../css/base.css" rel="stylesheet">
+
+        <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!--[if lt IE 9]>
+            <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+            <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+        <![endif]-->
+
+        
+    </head>
+
+    <body>
+
+        <div class="navbar navbar-default navbar-fixed-top" role="navigation">
+    <div class="container">
+
+        <!-- Collapsed navigation -->
+        <div class="navbar-header">
+            
+            <!-- Expander button -->
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            
+
+            <!-- Main title -->
+            <a class="navbar-brand" href="../..">VineCPP</a>
+        </div>
+
+        <!-- Expanded navigation -->
+        <div class="navbar-collapse collapse">
+            
+                <!-- Main navigation -->
+                <ul class="nav navbar-nav">
+                
+                
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Getting started <b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                        
+                            <li >
+                                <a href="../../installVineCPP">Installation</a>
+                            </li>
+                        
+                            <li >
+                                <a href="../../DemoVineCPP">Demo</a>
+                            </li>
+                        
+                            <li >
+                                <a href="../../SetSeedVineCPP">SetSeedVineCPP</a>
+                            </li>
+                        
+                        </ul>
+                    </li>
+                
+                
+                
+                    <li class="dropdown active">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Functions for pair-copulas <b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                        
+                            <li >
+                                <a href="../PairCopulaAIC">PairCopulaAIC</a>
+                            </li>
+                        
+                            <li >
+                                <a href="../PairCopulaCDF">PairCopulaCDF</a>
+                            </li>
+                        
+                            <li >
+                                <a href="../PairCopulaFit">PairCopulaFit</a>
+                            </li>
+                        
+                            <li >
+                                <a href="../PairCopulaHfun">PairCopulaHfun</a>
+                            </li>
+                        
+                            <li >
+                                <a href="../PairCopulaHVolume">PairCopulaHVolume</a>
+                            </li>
+                        
+                            <li >
+                                <a href="../PairCopulaIndepTest">PairCopulaIndepTest</a>
+                            </li>
+                        
+                            <li class="active">
+                                <a href=".">PairCopulaInvHfun</a>
+                            </li>
+                        
+                            <li >
+                                <a href="../PairCopulaInvVfun">PairCopulaInvVfun</a>
+                            </li>
+                        
+                            <li >
+                                <a href="../PairCopulaKendallTau">PairCopulaKendallTau</a>
+                            </li>
+                        
+                            <li >
+                                <a href="../PairCopulaParameterBounds">PairCopulaParameterBounds</a>
+                            </li>
+                        
+                            <li >
+                                <a href="../PairCopulaRand">PairCopulaRand</a>
+                            </li>
+                        
+                            <li >
+                                <a href="../PairCopulaSelect">PairCopulaSelect</a>
+                            </li>
+                        
+                            <li >
+                                <a href="../PairCopulaVfun">PairCopulaVfun</a>
+                            </li>
+                        
+                            <li >
+                                <a href="../SetGlobalPairCopulaParameterBounds">SetGlobalPairCopulaParameterBounds</a>
+                            </li>
+                        
+                        </ul>
+                    </li>
+                
+                
+                
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Functions for vine copula <b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                        
+                            <li >
+                                <a href="../VineCopulaFit">VineCopulaFit</a>
+                            </li>
+                        
+                            <li >
+                                <a href="../VineCopulaNegLL">VineCopulaNegLL</a>
+                            </li>
+                        
+                            <li >
+                                <a href="../VineCopulaRand">VineCopulaRand</a>
+                            </li>
+                        
+                        </ul>
+                    </li>
+                
+                
+                
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">The VineCopula class <b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                        
+                            <li >
+                                <a href="../VineCopula">VineCopula class</a>
+                            </li>
+                        
+                            <li >
+                                <a href="../VineCopula_Constructor">Constructor</a>
+                            </li>
+                        
+                            <li >
+                                <a href="../VineCopula_Fit">Fit</a>
+                            </li>
+                        
+                            <li >
+                                <a href="../VineCopula_SeqTestOnSimplified">SeqTestOnSimplified</a>
+                            </li>
+                        
+                            <li >
+                                <a href="../VineCopula_Sim">Sim</a>
+                            </li>
+                        
+                            <li >
+                                <a href="../VineCopula_StructureSelect">StructureSelect</a>
+                            </li>
+                        
+                        </ul>
+                    </li>
+                
+                
+                </ul>
+            
+
+            
+            <!-- Search, Navigation and Repo links -->
+            <ul class="nav navbar-nav navbar-right">
+                
+                
+                <li >
+                    <a rel="next" href="../PairCopulaIndepTest">
+                        <i class="fa fa-arrow-left"></i> Previous
+                    </a>
+                </li>
+                <li >
+                    <a rel="prev" href="../PairCopulaInvVfun">
+                        Next <i class="fa fa-arrow-right"></i>
+                    </a>
+                </li>
+                
+                
+            </ul>
+            
+        </div>
+    </div>
+</div>
+
+        <div class="container">
+            <div class="col-md-3"><div class="bs-sidebar hidden-print affix well" role="complementary">
+    <ul class="nav bs-sidenav">
+    
+        <li class="main active"><a href="#paircopulainvhfun">PairCopulaInvHfun</a></li>
+        
+            <li><a href="#purpose">Purpose</a></li>
+        
+            <li><a href="#usage">Usage</a></li>
+        
+            <li><a href="#inputs">Inputs</a></li>
+        
+            <li><a href="#outputs">Outputs</a></li>
+        
+    
+    </ul>
+</div></div>
+            <div class="col-md-9" role="main">
+
+<h1 id="paircopulainvhfun">PairCopulaInvHfun</h1>
+<p>Computing the inverse of the h-function of a pair-copula</p>
+<hr />
+<h2 id="purpose">Purpose</h2>
+<p>The function computes the inverse of the h-function, (i.e., the 
+        inverse of the conditional distribution function of U1|U2 in the
+        first argument, given U2=u2, evaluated at u1. Possible copula
+        families:</p>
+<pre class="prettyprint well"><code>       0   Indep
+       1   AMH
+       2   AsymFGM
+       3   BB1
+       4   BB6
+       5   BB7
+       6   BB8
+       7   Clayton
+       8   FGM
+       9   Frank
+       10  Gaussian
+       11  Gumbel
+       12  IteratedFGM
+       13  Joe
+       14  PartialFrank
+       15  Plackett
+       16  Tawn1
+       17  Tawn2
+       18  Tawn
+       19  t
+</code></pre>
+<h2 id="usage">Usage</h2>
+<pre class="prettyprint well"><code>           U = PairCopulaHfun(family,u1,u2,theta)
+       Rotated pair-copulas
+           U = PairCopulaHfun(family,u1,u2,theta,rotation)
+</code></pre>
+<h2 id="inputs">Inputs</h2>
+<pre class="prettyprint well"><code>   family    = The copula family.
+   u1        = A (n x 1) dimensional vector of values lying in [0,1].
+   u2        = A (n x 1) dimensional vector of values lying in [0,1].
+   theta     = The parameter vector for the pair-copula.
+   rotation  = The degree of rotation, i.e., either 90, 180 or 270. No
+               rotation is achieved by letting the rotation argument
+               empty or by choosing 0 rotation.
+</code></pre>
+<h2 id="outputs">Outputs</h2>
+<pre class="prettyprint well"><code>  U          = The value of the inverse h-function evaluated at u1,
+               given U2 = u2.
+</code></pre>
+</div>
+        </div>
+
+        <footer class="col-md-12">
+            <hr>
+            
+            <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a>.</p>
+        </footer>
+
+        
+
+        <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
+        <script src="../../js/bootstrap-3.0.3.min.js"></script>
+        <script src="../../js/prettify-1.0.min.js"></script>
+        <script src="../../js/base.js"></script>
+    </body>
+</html>
