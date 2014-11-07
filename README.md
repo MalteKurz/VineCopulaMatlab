@@ -4,14 +4,14 @@ A **MATLAB toolbox** for vine copulas based on C++
 ___________________________________________________________________________
 
 ## Description of the Vine Copulas with C++ (VineCPP) toolbox
-The toolbox can be used for high-dimensional dependence modeling with vine copula models. An key feature of the toolbox is a framework, which allows to test whether the simplifying assumption is a reasonable assumption for approximating high-dimensional distributions using simplified vine copula models.
+The toolbox can be used for high-dimensional dependence modeling with vine copula models. A key feature of the toolbox is a framework, which allows to test whether the simplifying assumption is a reasonable assumption for approximating high-dimensional distributions using simplified vine copula models.
 
 ## Highlights
   * Modeling of (high-)dimensional [0,1]-data by C-vine and D-vine copulas.
   * 20 different pair-copula families (62 families with rotated pair-copulas).
   * The most important object class VineCopula is implemented in MATLAB.
   * Functions for simulating from simplified and non-simplified C- and D-vine copulas. In the case of the non-simplified C- or D-vines, the parameters of all conditional bivariate copulas can be specified as functions of the conditioning variables.
-  * Functions for selecting and (jointly-)estimating C- and C-vine copula models.
+  * Functions for selecting and (jointly-)estimating C- and D-vine copula models.
   * Functions for (jointly-)estimating C- and D-vine copula models.
   * A vectorial independence test, which can be used for testing sequentially the simplified assumption for C- and D-vine copulas.
   * Most computations are implemented in C++. Parts can be optionally performed parallel.
@@ -20,10 +20,10 @@ The toolbox can be used for high-dimensional dependence modeling with vine copul
 Please see the [demo](DemoVineCPP.md) for further details about the functionality of the VineCPP toolbox.
 
 ## Remarks
-  * The central class of the toolbox is the VineCopula class. Working with those two classes, for most input variables consistency checks are performed.
+  * The central class of the toolbox is the VineCopula class. Working with this class, for most input variables consistency checks are performed.
   * In all the other functions (primarily the functions for two-dimensional
     (pair-)copulas there are not that many consistency checks performed.
-  * At the moment within this toolbox you can not only choose between C-vines and D-vines. The superclass of regular vines (R-vines) is not implemented yet. If you also want to use R-Vines then the R-package VineCopula (cf. Schepsmeier, Stöber, and Brechmann (2013)) is an excellent alternative. 
+  * At the moment within this toolbox you can only choose between C-vines and D-vines. The superclass of regular vines (R-vines) is not implemented yet. If you also want to use R-Vines then the R-package VineCopula (cf. Schepsmeier, Stöber, and Brechmann (2013)) is an excellent alternative. 
  
 ## Dependencies
   * A **C++-compiler** being compatible with the used MATLAB release (cf.
