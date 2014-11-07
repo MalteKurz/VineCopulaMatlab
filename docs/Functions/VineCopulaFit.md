@@ -80,22 +80,22 @@ The function computes ML-estimates for the parameters of a C-Vine
        ParamHat        = The ML-estimates of the parameters for the
                          (d-1)*d/2 pair-copulas. These estimates are given
                          in the same order as the families vector, but
-                         in a row-vector. If a pair-copula is a
+                         in a row-vector. If a pair-copula is an
                          independence copula, then there is no estimate
-                         given. Furthermore, if a pair-copula  has two or 
+                         given. Furthermore, if a pair-copula has two or 
                          more parameters, the estimates are given in same 
                          order as they have to be provided if the pair-
-                         copula is considered only. For example for a t-
+                         copula is considered only. For example, for a t-
                          copula, the first estimate is for the parameter
                          rho and the second one for the degrees of freedom
                          parameter nu.
        MaxLogLikes     = The first entry is the value of copula-log-
-                         likelihood evaluated at the sequtially estimated
+                         likelihood evaluated at the sequentially estimated
                          ML-estimates. The second value is the value of
                          the copula-log-likelihood evaluated for the
                          joint ML-estimates.
        theta0          = The vector of ML-estimates, which are obtained by
-                         using the sequentially estimation approach. Note
-                         that this estimates are also used as starting
+                         using the sequential estimation approach. Note
+                         that these estimates are also used as starting
                          point for the global maximum likelihood
                          estimation.

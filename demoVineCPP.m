@@ -9,7 +9,7 @@
 % simplified vine copula models. Estimation is illustrated in the
 % third part of this demo. The fourth part of the demo shows how one can
 % use the toolbox to test for simplified vine copulas. It is shown how the
-% simplifying assumption can be tested with an sequential approach, based
+% simplifying assumption can be tested with a sequential approach, based
 % on a statistical tests on vectorial independencies.
 
 %% Simulating possibly non-simplified vine copulas
@@ -17,7 +17,7 @@
 % In the following three different data generating processes will be used
 % to present the functioning of the toolbox. The first example is the
 % five-dimensional Clayton copula. From this copula, one can simulate in
-% two different ways, either  by using the laplace transform to simulate
+% two different ways, either  by using the Laplace transform to simulate
 % directly from the five-dimensional Archimedean copula or by simulating
 % from the corresponding C-Vine representation (like it will be done in the 
 % following).
@@ -35,7 +35,7 @@ structure = 1:dimension;
 % unconditional bivariate copulas)
 simplified = ones(1,(dimension-1)*(dimension-2)/2);
 
-% Specify the vine copula type (yet C-Vine is the only possible choice)
+% Specify the vine copula type (yet only C-Vine and D-Vine are implemented)
 type = 'C-Vine';
 
 % Give the parameters for all unconditional and partial copulas being
@@ -62,7 +62,7 @@ plotmatrix(U)
 % functional parameter $\theta(x_{1}) = (4x_{1}-2)^{3}$.
 %
 % The described C-Vine is constructed as a member of the VineCopula class,
-% which form the central class of the whole toolbox.
+% which forms the central class of the whole toolbox.
 
 % Choose the number of dimensions for the C-Vine.
 dimension = 5;
@@ -76,7 +76,7 @@ structure = 1:dimension;
 % The last copula is a conditional copula
 simplified(end) = 0;
 
-% Specify the vine copula type (yet C-Vine is the only possible choice)
+% Specify the vine copula type (yet only C-Vine and D-Vine are implemented)
 type = 'C-Vine';
 
 % Give the parameters for all pair-copulas copulas being
@@ -102,7 +102,7 @@ plotmatrix(V)
 
 
 %%
-% The third example is a arbitrary combination of partial copulas and
+% The third example is an arbitrary combination of partial copulas and
 % conditional copulas with functional parameter as building block of a
 % five-dimensional non-simplified C-Vine copula.
 
@@ -142,7 +142,7 @@ VineCopulaSel3 = StructureSelect(VineCopula(5,'C-Vine',1),W);
 %%
 % For the first and second example, the structure is selected manually.
 % For the second example with the Frank copula with varying parameter
-% a Independence copula is selected as partial copula to obtain a
+% an Independence copula is selected as partial copula to obtain an
 % approximation of the overall distribution, which is a simplified C-Vine
 % copula.
 

@@ -21,7 +21,7 @@ A logical or vector of logicals, which
                               copulas) or each conditional copula
                               being part of the vine copula
                               model is set to 1 for a pair-copula,
-                              i.e., a unconditional bivariate
+                              i.e., an unconditional bivariate
                               copula or 0 for a conditional
                               copula.
                               
@@ -36,7 +36,7 @@ Possible values for simplified are 1
                               0 then every conditional copula is
                               set to be a conditional copula with
                               functional parameter (note that this
-                              can also be a unconditional copulas
+                              can also be an unconditional copula
                               whenever the functional parameter is
                               a constant). Alternatively, the
                               simplified property can also be
@@ -178,18 +178,18 @@ The "function" VineCopula can be
 ###   [Fit (VineCopulaObject)](VineCopula_Fit.md)
 The method Fit can be used to
                               estimate a vine copula model,
-                              specified as a object of the
+                              specified as an object of the
                               VineCopula class, using a dataset by
                               maximizing the log-likelihood of the
                               vine copula.
 ###  [Sim (VineCopulaObject)](VineCopula_Sim.md)
 The method Sim can be used to
                               simulate from a vine copula,
-                              specified as a object of the
+                              specified as an object of the
                               VineCopula class.
 ###  [StructureSelect (VineCopulaObject)](VineCopula_StructureSelect.md)
 The method StructureSelect can be
-                              used to find a "adequat" structure
+                              used to find an "adequate" structure
                               and pair-copula families (and
                               parameters) for a given data set.
 ###  GetPseudoObsFromVine
