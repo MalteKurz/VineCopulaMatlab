@@ -9,9 +9,9 @@ The function can be used to find an adequate structure
         set. By default (StructuringRule = 0) the nodes of
         the C-vine are chosen in a way that in each tree,
         the root (i.e. the node, which is connected by a
-        copula to all other nodes) is the variable, which has
+        copula to all other nodes) is the variable which has
         maximal dependence with all other variables. The
-        maximal dependence is found by choosing the variable,
+        maximal dependence is found by choosing the variable
         which has the maximal column sum in the matrix of
         absolute empirical Kendall’s τ (cf. Schepsmeier,
         Stöber, and Brechmann (2013) for an R-function
@@ -22,7 +22,7 @@ The function can be used to find an adequate structure
 Alternative methods for choosing a structure for
         C-Vine copulas (cf. Nikoloulopoulos, Joe and Li
         (2012)):
-        The root node of the first tree is chosen in same way
+        The root node of the first tree is chosen in the same way
         as in the default method, i.e., the variable with the
         strongest dependence with all other variables. Then
         one can choose between three rules suggested in
@@ -115,14 +115,14 @@ For D-Vine copulas there is no structuring rule
 
 ## Outputs
         VineCopulaHat   = An object from the class VineCopula.
-                          The select vine copula structure can
+                          The selected vine copula structure can
                           be found in VineCopulaHat.structure
                           and the selected pair-copulas in
                           VineCopulaHat.families. Furthermore,
                           the sequential estimates, which are
                           obtained during the selection
                           procedure of the structure and
-                          copula families are stored in
+                          copula families, are stored in
                           VineCopulaHat.parameters.
 
 
