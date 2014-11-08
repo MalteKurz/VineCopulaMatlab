@@ -1,10 +1,10 @@
 # Demo of the VineCPP toolbox
 
-This demo should illustrate how the VineCPP toolbox can be used to work with vine copulas. This demo starts with the simulation of data from vine copula models. The focus in this part is on the simulation from vine copulas, where some of the conditional copulas are copulas for which the parameter is a function of the conditioning variable. The second part shows how one can use the functions of the VineCPP toolbox to select simplified vine copula models. Estimation is illustrated in the third part of this demo. The fourth part of the demo shows how one can use the toolbox to test for simplified vine copulas. It is shown how the simplifying assumption can be tested with an sequential approach, based on a statistical tests on vectorial independencies.
+This demo should illustrate how the VineCPP toolbox can be used to work with vine copulas. This demo starts with the simulation of data from vine copula models. The focus in this part is on the simulation from vine copulas, where some of the conditional copulas are copulas for which the parameter is a function of the conditioning variable. The second part shows how one can use the functions of the VineCPP toolbox to select simplified vine copula models. Estimation is illustrated in the third part of this demo. The fourth part of the demo shows how one can use the toolbox to test for simplified vine copulas. It is shown how the simplifying assumption can be tested with a sequential approach, based on a statistical tests on vectorial independencies.
 
 ## Simulating possibly non-simplified vine copulas
 
-In the following three different data generating processes will be used to present the functioning of the toolbox. The first example is the five-dimensional Clayton copula. From this copula, one can simulate in two different ways, either  by using the laplace transform to simulate directly from the five-dimensional Archimedean copula or by simulating from the corresponding C-Vine representation (like it will be done in the following).
+In the following three different data generating processes will be used to present the functioning of the toolbox. The first example is the five-dimensional Clayton copula. From this copula, one can simulate in two different ways, either  by using the Laplace transform to simulate directly from the five-dimensional Archimedean copula or by simulating from the corresponding C-Vine representation (like it will be done in the following).
 
 <pre class="codeinput"><span class="comment">% Choose the number of dimensions for the C-Vine.</span>
 dimension = 5;
@@ -19,7 +19,7 @@ structure = 1:dimension;
 <span class="comment">% unconditional bivariate copulas)</span>
 simplified = ones(1,(dimension-1)*(dimension-2)/2);
 
-<span class="comment">% Specify the vine copula type (yet C-Vine is the only possible choice)</span>
+<span class="comment">% Specify the vine copula type (yet only C-Vine and D-Vine are implemented)</span>
 type = <span class="string">'C-Vine'</span>;
 
 <span class="comment">% Give the parameters for all unconditional and partial copulas being</span>
@@ -78,7 +78,7 @@ VineCopula
 
 </pre><img vspace="5" hspace="5" src="demoVineCPP_01.png" alt="">
 
-The second example is the same vine copula (the C-Vine representation of the five-dimensional Clayton copula), where the last partial copula (i.e., the copula C_45|123 is substituted by a Frank copula with functional parameter theta(x_1) = (4x_1-2)^3. The described C-Vine is constructed as a member of the VineCopula class, which form the central class of the whole toolbox.
+The second example is the same vine copula (the C-Vine representation of the five-dimensional Clayton copula), where the last partial copula (i.e., the copula C_45|123 is substituted by a Frank copula with functional parameter theta(x_1) = (4x_1-2)^3. The described C-Vine is constructed as a member of the VineCopula class, which forms the central class of the whole toolbox.
 
 <pre class="codeinput"><span class="comment">% Choose the number of dimensions for the C-Vine.</span>
 dimension = 5;
@@ -92,7 +92,7 @@ structure = 1:dimension;
 <span class="comment">% The last copula is a conditional copula</span>
 simplified(end) = 0;
 
-<span class="comment">% Specify the vine copula type (yet C-Vine is the only possible choice)</span>
+<span class="comment">% Specify the vine copula type (yet only C-Vine and D-Vine are implemented)</span>
 type = <span class="string">'C-Vine'</span>;
 
 <span class="comment">% Give the parameters for all pair-copulas copulas being</span>
@@ -148,7 +148,7 @@ VineCopula
 V = Sim(VineCopulaObject2,500);
 figure(<span class="string">'Units'</span>,<span class="string">'normalized'</span>,<span class="string">'Position'</span>,[0.2 0.2 0.6 0.8],<span class="string">'PaperPositionMode'</span>,<span class="string">'auto'</span>);
 plotmatrix(V)
-</pre><img vspace="5" hspace="5" src="demoVineCPP_02.png" alt=""> <p>The third example is a arbitrary combination of partial copulas and conditional copulas with functional parameter as building block of a five-dimensional non-simplified C-Vine copula.</p><pre class="codeinput"><span class="comment">% Construct the object of the VineCopula class and apply the method Sim to</span>
+</pre><img vspace="5" hspace="5" src="demoVineCPP_02.png" alt=""> <p>The third example is an arbitrary combination of partial copulas and conditional copulas with functional parameter as building block of a five-dimensional non-simplified C-Vine copula.</p><pre class="codeinput"><span class="comment">% Construct the object of the VineCopula class and apply the method Sim to</span>
 <span class="comment">% it.</span>
 VineCopulaObject3 = VineCopula(5,<span class="string">'C-Vine'</span>,<span class="keyword">...</span>
     [0,0,1,1,1,1],<span class="keyword">...</span>
@@ -205,7 +205,7 @@ VineCopula
 In a next step, the method StructureSelect for objects from the class VineCopula should be used for selecting simplified vine copulas, which are then used as an approximation to the overall distributions. The nodes of the C-vine are chosen in a way that in each tree, the root (i.e. the node, which is connected by a copula to all other nodes) is the variable which has maximal dependence with all other variables. The maximal dependence is found by choosing the variable which has the maximal column sum in the matrix of absolute empirical Kendall&#8217;s &#964; (cf. Schepsmeier, St&ouml;ber, and Brechmann (2013) for an R-function (RVineStructureSelect) of exactly the same procedure and Czado, Schepsmeier, and Min (2012, p. 240) for the theoretical background of the approach). Furthermore, the copula families are chosen according to the AIC criterion and for each pair- copula an independence test is performed (cf. Schepsmeier, St&ouml;ber, and Brechmann (2013) and Brechmann and Schepsmeier (2013) for R-functions (RVineStructureSelect / RVineCopSelect / CDVineCopSelect) and Genest and Favre (2007, p. 351) for the independence test).
 
 <pre class="codeinput">VineCopulaSel3 = StructureSelect(VineCopula(5,<span class="string">'C-Vine'</span>,1),W);
-</pre><p>For the first and second example, the structure is selected manually. For the second example with the Frank copula with varying parameter a Independence copula is selected as partial copula to obtain a approximation of the overall distribution, which is a simplified C-Vine copula.</p><pre class="codeinput">VineCopulaSel1 = VineCopula(5,<span class="string">'C-Vine'</span>,<span class="keyword">...</span>
+</pre><p>For the first and second example, the structure is selected manually. For the second example with the Frank copula with varying parameter an Independence copula is selected as partial copula to obtain a approximation of the overall distribution, which is a simplified C-Vine copula.</p><pre class="codeinput">VineCopulaSel1 = VineCopula(5,<span class="string">'C-Vine'</span>,<span class="keyword">...</span>
     true,<span class="keyword">...</span>
     [1 2 3 4 5],<span class="keyword">...</span>
     repmat({<span class="string">'Clayton'</span>},1,5*(5-1)/2));
