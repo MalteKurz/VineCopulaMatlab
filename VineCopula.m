@@ -1,4 +1,4 @@
-classdef VineCopula %< matlab.mixin.CustomDisplay
+classdef VineCopula < matlab.mixin.CustomDisplay
     %VINECOPULA The class of vine copula models (yet C-Vines and D-Vines only)
     %
     %VINECOPULA Properties
