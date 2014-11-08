@@ -1,4 +1,4 @@
-classdef VineCopula < matlab.mixin.CustomDisplay
+classdef VineCopula %< matlab.mixin.CustomDisplay
     %VINECOPULA The class of vine copula models (yet C-Vines and D-Vines only)
     %
     %VINECOPULA Properties
@@ -550,6 +550,7 @@ classdef VineCopula < matlab.mixin.CustomDisplay
         % conditional copulas.
         function obj = set.condparameterfunctionals(obj,condparameterfunctionals)
             d = obj.dimension;
+            Families = {'Indep','AMH','AsymFGM','BB1','BB6','BB7','BB8','Clayton','FGM','Frank','Gaussian','Gumbel','IteratedFGM','Joe','PartialFrank','Plackett','Tawn1','Tawn2','Tawn','t'};    
             
             if not(isempty(condparameterfunctionals))
                 if sum(obj.simplified==0) > 0
@@ -587,7 +588,7 @@ classdef VineCopula < matlab.mixin.CustomDisplay
                     for j = 1:length(lb)
                         condparameters = condparameterfunctionalsVec{k}(rand(500,sum(((d-1)*(d-2)/2-j)<tri)));
                         if sum(condparameters < lb(j)) > 0 || sum(condparameters > ub(j)) > 0
-                            error(['The domain of the parameter functional for the ' num2str(j) '. parameter of the conditional ' Families{obj.families(1,i+d-1)} ' copula has to be a subset of the intervall (' num2str(lb(j)) ' , ' num2str(ub(j)) ').'])
+                            error(['The domain of the parameter functional for the ' num2str(j) '. parameter of the conditional ' Families{obj.families(1,i+d-1)+1} ' copula has to be a subset of the intervall (' num2str(lb(j)) ' , ' num2str(ub(j)) ').'])
                         end
                         k = k+1;
                     end
@@ -991,7 +992,7 @@ classdef VineCopula < matlab.mixin.CustomDisplay
                                 [lb,ub] = PairCopulaParameterBounds(families(1,i));
                                 for j = 1:length(lb)
                                     if parameters(k) < lb(j) || parameters(k) > ub(j)
-                                        warning('VineCopula:ChangeOfOtherPropertyNeeded',['The ' num2str(j) '. parameter of the ' Families{obj.families(1,i)} ' copula has to lie between ' num2str(lb(j)) ' and ' num2str(ub(j)) '.'])
+                                        warning('VineCopula:ChangeOfOtherPropertyNeeded',['The ' num2str(j) '. parameter of the ' Families{obj.families(1,i)+1} ' copula has to lie between ' num2str(lb(j)) ' and ' num2str(ub(j)) '.'])
                                     end
                                     k = k+1;
                                 end
