@@ -16,6 +16,7 @@ pages:
 - ['Functions/PairCopulaInvVfun.md', 'Functions for pair-copulas', 'PairCopulaInvVfun']
 - ['Functions/PairCopulaKendallTau.md', 'Functions for pair-copulas', 'PairCopulaKendallTau']
 - ['Functions/PairCopulaParameterBounds.md', 'Functions for pair-copulas', 'PairCopulaParameterBounds']
+- ['Functions/PairCopulaPDF.md', 'Functions for pair-copulas', 'PairCopulaPDF']
 - ['Functions/PairCopulaRand.md', 'Functions for pair-copulas', 'PairCopulaRand']
 - ['Functions/PairCopulaSelect.md', 'Functions for pair-copulas', 'PairCopulaSelect']
 - ['Functions/PairCopulaVfun.md', 'Functions for pair-copulas', 'PairCopulaVfun']
