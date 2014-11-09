@@ -17,7 +17,7 @@ The toolbox can be used for high-dimensional dependence modeling with vine copul
   * Most computations are implemented in C++. Parts can be optionally performed parallel.
 
 ## Demo
-Please see the [demo](DemoVineCPP.md) for further details about the functionality of the VineCPP toolbox.
+Please see the [demo](http://maltekurz.github.io/VineCPP/DemoVineCPP/) for further details about the functionality of the VineCPP toolbox.
 
 ## Remarks
   * The central class of the toolbox is the VineCopula class. Working with this class, for most input variables consistency checks are performed.
