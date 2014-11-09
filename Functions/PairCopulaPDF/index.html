@@ -9,7 +9,7 @@
         
         <link rel="shortcut icon" href="../../img/favicon.ico">
 
-        <title>SetGlobalPairCopulaParameterBounds - VineCPP</title>
+        <title>PairCopulaPDF - VineCPP</title>
 
         <link href="../../css/bootstrap-custom.min.css" rel="stylesheet">
         <link href="../../css/font-awesome-4.0.3.css" rel="stylesheet">
@@ -118,8 +118,8 @@
                                 <a href="../PairCopulaParameterBounds">PairCopulaParameterBounds</a>
                             </li>
                         
-                            <li >
-                                <a href="../PairCopulaPDF">PairCopulaPDF</a>
+                            <li class="active">
+                                <a href=".">PairCopulaPDF</a>
                             </li>
                         
                             <li >
@@ -134,8 +134,8 @@
                                 <a href="../PairCopulaVfun">PairCopulaVfun</a>
                             </li>
                         
-                            <li class="active">
-                                <a href=".">SetGlobalPairCopulaParameterBounds</a>
+                            <li >
+                                <a href="../SetGlobalPairCopulaParameterBounds">SetGlobalPairCopulaParameterBounds</a>
                             </li>
                         
                         </ul>
@@ -205,12 +205,12 @@
                 
                 
                 <li >
-                    <a rel="next" href="../PairCopulaVfun">
+                    <a rel="next" href="../PairCopulaParameterBounds">
                         <i class="fa fa-arrow-left"></i> Previous
                     </a>
                 </li>
                 <li >
-                    <a rel="prev" href="../VineCopulaFit">
+                    <a rel="prev" href="../PairCopulaRand">
                         Next <i class="fa fa-arrow-right"></i>
                     </a>
                 </li>
@@ -226,51 +226,66 @@
             <div class="col-md-3"><div class="bs-sidebar hidden-print affix well" role="complementary">
     <ul class="nav bs-sidenav">
     
-        <li class="main active"><a href="#setglobalpaircopulaparameterbounds">SetGlobalPairCopulaParameterBounds</a></li>
+        <li class="main active"><a href="#paircopulapdf">PairCopulaPDF</a></li>
         
-    
-        <li class="main "><a href="#purpose">Purpose</a></li>
+            <li><a href="#purpose">Purpose</a></li>
         
-    
-        <li class="main "><a href="#usage">Usage</a></li>
+            <li><a href="#usage">Usage</a></li>
+        
+            <li><a href="#inputs">Inputs</a></li>
+        
+            <li><a href="#outputs">Outputs</a></li>
         
     
     </ul>
 </div></div>
             <div class="col-md-9" role="main">
 
-<h1 id="setglobalpaircopulaparameterbounds">SetGlobalPairCopulaParameterBounds</h1>
-<p>Setting the global (i.e., for the whole VineCPP toolbox) pair-copula parameter bounds, which are used for estimation and consistency checks</p>
+<h1 id="paircopulapdf">PairCopulaPDF</h1>
+<p>Computing the p.d.f. of a pair-copula</p>
 <hr />
-<h1 id="purpose">Purpose</h1>
-<p>The GUI can be used to set the global (i.e., for the whole VineCPP
-        toolbox) pair-copula parameter bounds, which are used for
-        estimation and consistency checks. Possible copula families (the
-        default values for the parameter bounds are given in parenthesis,
-        where the ordering is as follows (lb1, ub1; lb2, ub2; lb3, ub3)):</p>
+<h2 id="purpose">Purpose</h2>
+<p>The function computes the value of the copula density at (u1,u2),
+        which has to lie in the 2-dimensional unit cube. Possible
+        pair-copula families:</p>
 <pre class="prettyprint well"><code>       0   Indep
-       1   AMH (-1, 1)
-       2   AsymFGM (0, 1)
-       3   BB1 (0, 6; 1, 6)
-       4   BB6 (1, 6; 1, 6)
-       5   BB7 (1, 6; 0.001, 6)
-       6   BB8 (1, 6; 0.001, 1)
-       7   Clayton (0, Inf)
-       8   FGM (-1, 1)
-       9   Frank (-30, 30)
-       10  Gaussian (-0.999, 0.999)
-       11  Gumbel (1, Inf)
-       12  IteratedFGM (-1, 1; -1, 1)
-       13  Joe (1, Inf)
-       14  PartialFrank (0, 30)
-       15  Plackett (0.001, Inf)
-       16  Tawn1 (1.001, 20; 0.001, 0.999)
-       17  Tawn2 (1.001, 20; 0.001, 0.999)
-       18  Tawn (1.0001, 20; 0.001, 0.999; 0.001, 0.999)
-       19  t (-0.999, 0.999; 1, 30)
+       1   AMH
+       2   AsymFGM
+       3   BB1
+       4   BB6
+       5   BB7
+       6   BB8
+       7   Clayton
+       8   FGM
+       9   Frank
+       10  Gaussian
+       11  Gumbel
+       12  IteratedFGM
+       13  Joe
+       14  PartialFrank
+       15  Plackett
+       16  Tawn1
+       17  Tawn2
+       18  Tawn
+       19  t
 </code></pre>
-<h1 id="usage">Usage</h1>
-<pre class="prettyprint well"><code>           SetGlobalPairCopulaParameterBounds
+<h2 id="usage">Usage</h2>
+<pre class="prettyprint well"><code>           p = PairCopulaPDF(family,u1,u2,theta)
+       Rotated pair-copulas
+           p = PairCopulaPDF(family,u1,u2,theta,rotation)
+</code></pre>
+<h2 id="inputs">Inputs</h2>
+<pre class="prettyprint well"><code>   family    = The copula family.
+   u1        = A (n x 1) dimensional vector of values lying in [0,1].
+   u2        = A (n x 1) dimensional vector of values lying in [0,1].
+   theta     = The parameter vector for the pair-copula.
+   rotation  = The degree of rotation, i.e., either 90, 180 or 270. No
+               rotation is achieved by letting the rotation argument
+               empty or by choosing 0 rotation.
+</code></pre>
+<h2 id="outputs">Outputs</h2>
+<pre class="prettyprint well"><code>  p          = n dimensional vector of values of the copula density
+               evaluated at (u1,u2).
 </code></pre>
 </div>
         </div>
