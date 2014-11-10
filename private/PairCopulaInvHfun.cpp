@@ -159,7 +159,7 @@ void PairCopulaInvHfun_VecPar(int family, int rotation, const double *theta, dou
         }
         case 90:
         {
-            PairCopulaInvVfun(family, theta, V, U, u, n);
+            PairCopulaInvVfun_VecPar(family, theta, V, U, u, n);
             for (i=0;i<n;i++) u[i]=1-u[i];
             break;
         }
@@ -171,7 +171,7 @@ void PairCopulaInvHfun_VecPar(int family, int rotation, const double *theta, dou
         }
         case 270:
         {
-            PairCopulaInvVfun(family, theta, V, U, u, n);
+            PairCopulaInvVfun_VecPar(family, theta, V, U, u, n);
             break;
         }
     }
@@ -807,7 +807,7 @@ void PairCopulaInvVfun_VecPar(int family, const double *theta, double *U, double
         default:
         {
             // symmetric copulas
-            PairCopulaInvHfun(family, theta, V, U, u, n);
+            PairCopulaInvHfun_VecPar(family, theta, V, U, u, n);
             break;
         }
     }
