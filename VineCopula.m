@@ -586,7 +586,7 @@ classdef VineCopula < matlab.mixin.CustomDisplay
                 if obj.simplified(i)==0
                     [lb,ub] = PairCopulaParameterBounds(obj.families(1,i+d-1));
                     for j = 1:length(lb)
-                        condparameters = condparameterfunctionalsVec{k}(rand(500,sum(((d-1)*(d-2)/2-j)<tri)));
+                        condparameters = condparameterfunctionalsVec{k}(rand(500,sum(((d-1)*(d-2)/2-i)<tri)));
                         if sum(condparameters < lb(j)) > 0 || sum(condparameters > ub(j)) > 0
                             error(['The domain of the parameter functional for the ' num2str(j) '. parameter of the conditional ' Families{obj.families(1,i+d-1)+1} ' copula has to be a subset of the intervall (' num2str(lb(j)) ' , ' num2str(ub(j)) ').'])
                         end
@@ -1033,7 +1033,7 @@ classdef VineCopula < matlab.mixin.CustomDisplay
                     if obj.simplified(i)==0
                         [lb,ub] = PairCopulaParameterBounds(obj.families(1,i+d-1));
                         for j = 1:length(lb)
-                            condparameters = condparameterfunctionals{k}(rand(500,sum(((d-1)*(d-2)/2-j)<tri)));
+                            condparameters = condparameterfunctionals{k}(rand(500,sum(((d-1)*(d-2)/2-i)<tri)));
                             if sum(condparameters < lb(j)) > 0 || sum(condparameters > ub(j)) > 0
                                 error(['The domain of the parameter functional for the ' num2str(j) '. parameter of the conditional ' Families(obj.families(1,i+d-1)+1) ' copula has to be a subset of the intervall (' num2str(lb(j)) ' , ' num2str(ub(j)) ').'])
                             end
