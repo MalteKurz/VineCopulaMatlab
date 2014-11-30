@@ -1,4 +1,5 @@
 site_name: VineCPP
+repo_url: https://github.com/MalteKurz/VineCPP
 pages:
 - ['index.md', 'Home']
 
