@@ -1,5 +1,5 @@
 function p = PairCopulaPDF(family,u1,u2,varargin)
-%PAIRCOPULACDF Computing the p.d.f. of a pair-copula
+%PAIRCOPULAPDF Computing the p.d.f. of a pair-copula
 % Purpose
 %        The function computes the value of the copula density at (u1,u2), 
 %        which has to lie in the 2-dimensional unit cube. Possible
