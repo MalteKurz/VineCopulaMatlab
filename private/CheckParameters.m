@@ -66,7 +66,7 @@ for i = 1:NumbPCs
         otherwise
             [lb,ub] = PairCopulaParameterBounds(families(i));
             if sum(theta(k) < lb) > 0 || sum(theta(k) > ub) > 0
-                throwAsCaller(MException('',['The 1. parameter of the ' family ' copula has to lie between ' num2str(lb) ' and ' num2str(ub) '.']))
+                throwAsCaller(MException('',['The 1. parameter of copula family ' num2str(families(i)) ' has to lie between ' num2str(lb) ' and ' num2str(ub) '.']))
             end
             k=k+1;
             
