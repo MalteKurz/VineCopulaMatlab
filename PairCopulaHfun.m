@@ -63,7 +63,7 @@ end
 CheckData([u1,u2])
 
 % Check the copula parameters.
-CheckParameters(family,varargin{1:end})
+CheckParameters(family,varargin{1})
 
 if not(isnumeric(family))
     families = {'Indep','AMH','AsymFGM','BB1','BB6','BB7','BB8','Clayton','FGM','Frank','Gaussian','Gumbel','IteratedFGM','Joe','PartialFrank','Plackett','Tawn1','Tawn2','Tawn','t'};

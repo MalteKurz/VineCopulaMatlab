@@ -71,7 +71,7 @@ if not(isnumeric(family))
 end
 
 % Check the copula parameters.
-CheckParameters(family,varargin{1:end})
+CheckParameters(family,varargin{1})
 
 if family == 0
     p = PCCDF(0,u1,u2);

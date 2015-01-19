@@ -63,7 +63,7 @@ end
 CheckData([u1,u2])
 
 % Check the copula parameters.
-CheckParameters(family,varargin{1:end})
+CheckParameters(family,varargin{1})
             
 
 
