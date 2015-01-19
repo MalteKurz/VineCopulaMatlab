@@ -1,8 +1,8 @@
 #include "VineCPP_header.hpp"
 
-int UpdateStructure(std::vector<int>& structure, int StructuringRule, double *U, unsigned int d, unsigned int d1, unsigned int n)
+int UpdateStructure(std::vector<int>& structure, int StructuringRule, double *U, int d, int d1, unsigned int n)
 {
-    unsigned int i,j;
+    int i,j;
     
     std::vector<double> tau(d1*d1);
     SD_Kendall_Tau_Matrix(&tau[0],U,d1,n);
@@ -218,7 +218,7 @@ void GetPseudoObs(int *families, std::vector<double>& thetas, int *rotations, do
     std::vector<int> NumbParams(d-1);
     std::vector<double> U1(n),V1(n);
     
-    unsigned int i;
+    int i;
     int J=0;
     for (i=d-1;i>=1;i--)
     {
@@ -264,13 +264,13 @@ void GetPseudoObs(int *families, std::vector<double>& thetas, int *rotations, do
     }
 }
 
-void VineCopulaStructureSelect(int type, double *Structure, double *Families, double *Rotations, std::vector<double>& Thetas, double *U, unsigned int d, unsigned int n, int StructuringRule, double *familyset, int m)
+void VineCopulaStructureSelect(int type, double *Structure, double *Families, double *Rotations, std::vector<double>& Thetas, double *U, int d, unsigned int n, int StructuringRule, double *familyset, int m)
 {
     std::vector<int> families((d-1)*d/2);
     std::vector<int> rotations((d-1)*d/2);
     std::vector<double> thetas;
     
-    int i, j, k, I;
+    int i,j,k,I;
     
     switch (type)
     {
@@ -291,14 +291,14 @@ void VineCopulaStructureSelect(int type, double *Structure, double *Families, do
                     
                     std::vector<double> V(n*d);
                     
-                    for (i=0;i<n;i++)
+                    for (i=0;i<(int)n;i++)
                     {
                         V[i] = U[I*n+i];
                     }
                     
                     for (j=0;j<I;j++)
                     {
-                        for (i=0;i<n;i++)
+                        for (i=0;i<(int)n;i++)
                         {
                             V[(j+1)*n+i] = U[j*n+i];
                         }
@@ -306,7 +306,7 @@ void VineCopulaStructureSelect(int type, double *Structure, double *Families, do
                     
                     for (j=I+1;j<d;j++)
                     {
-                        for (i=0;i<n;i++)
+                        for (i=0;i<(int)n;i++)
                         {
                             V[j*n+i] = U[j*n+i];
                         }
@@ -320,14 +320,14 @@ void VineCopulaStructureSelect(int type, double *Structure, double *Families, do
                     {
                         I = UpdateStructure(structure, 0, &V[n], d, d-k, n);
                         
-                        for (i=0;i<n;i++)
+                        for (i=0;i<(int)n;i++)
                         {
                             V[i] = V[(I+1)*n+i];
                         }
                         
                         for (j=I+1;j<d-k;j++)
                         {
-                            for (i=0;i<n;i++)
+                            for (i=0;i<(int)n;i++)
                             {
                                 V[j*n+i] = V[(j+1)*n+i];
                             }
@@ -352,7 +352,7 @@ void VineCopulaStructureSelect(int type, double *Structure, double *Families, do
                     
                     for (j=0;j<d;j++)
                     {
-                        for (i=0;i<n;i++)
+                        for (i=0;i<(int)n;i++)
                         {
                             V[j*n+i] = U[structure[j]*n+i];
                         }

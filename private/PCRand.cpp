@@ -6,7 +6,7 @@ void mexFunction(int nlhs, mxArray *plhs[], int nrhs, const mxArray *prhs[])
     double *U, *V, *theta, *Rotation;
     double *Family, *N;
     int family, rotation;
-    unsigned int i, n;
+    unsigned int n;
     
     
 //associate inputs

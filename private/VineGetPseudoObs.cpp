@@ -6,7 +6,7 @@ void mexFunction(int nlhs, mxArray *plhs[], int nrhs, const mxArray *prhs[])
     double *U, *V, *V1, *V2, *families, *thetas, *rotation;
     double *Type;
     int type;
-    unsigned int i, n, d;
+    unsigned int n, d;
     
 
 //figure out dimensions

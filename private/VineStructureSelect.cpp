@@ -6,12 +6,13 @@ void mexFunction(int nlhs, mxArray *plhs[], int nrhs, const mxArray *prhs[])
     double *U, *familyset, *families, *rotations, *Thetas, *structure, *structuringrule;
     double *Type;
     int type, m, StructuringRule;
-    unsigned int n, d, i;
+    unsigned int n;
+    int i, d;
     
 
 //figure out dimensions
     n = (unsigned int)mxGetM(prhs[1]);
-    d = (unsigned int)mxGetN(prhs[1]);
+    d = (int)mxGetN(prhs[1]);
     
 //associate inputs
     Type = mxGetPr(prhs[0]);

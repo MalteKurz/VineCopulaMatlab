@@ -8,7 +8,7 @@ void mexFunction(int nlhs, mxArray *plhs[], int nrhs, const mxArray *prhs[])
  * given back to MATLAB.
  */
 //declare variables
-        const int *dims1, *dims2;
+        const mwSize *dims1, *dims2;
         double *U, *V, *TestStat, *V1, *V2, *V1dot, *V2dot, *V1dotdot, *V2dotdot;
         int d1, d2, n;
         int i,j,l;
@@ -126,7 +126,7 @@ void mexFunction(int nlhs, mxArray *plhs[], int nrhs, const mxArray *prhs[])
  * test statistics in the case of using the multiplier bootstrap approach.
  */
         //declare variables
-        const int *dims1, *dims2;
+        const mwSize *dims1, *dims2;
         double *U, *V, *TestStat;
         int d1, d2, n;
         int i,j,l;

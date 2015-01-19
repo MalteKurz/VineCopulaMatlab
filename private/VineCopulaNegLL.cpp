@@ -2,7 +2,7 @@
 
 double VineCopulaNegLL(VineCopula* Vine, double *U, int CutOffTree, unsigned int n)
 {
-    int l,i,j;
+    int i,j;
     double CLL=0;
     
     int d = Vine->Dimension;
@@ -228,10 +228,10 @@ double VineCopulaNegLL(VineCopula* Vine, double *U, int CutOffTree, unsigned int
 
 double VineCopulaNegLL(const double *Thetas,VineCopula* Vine, double *U, int CutOffTree, unsigned int n)
 {
-    int l,i,j;
+    int i,j;
     double CLL=0;
     
-    unsigned int d = Vine->Dimension;
+    int d = Vine->Dimension;
     int J = min(CutOffTree,d-1);
     
     if (Vine->Type == 0)

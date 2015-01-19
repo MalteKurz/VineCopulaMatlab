@@ -2,7 +2,7 @@
 
 void VineCopulaGetPseudoObs(VineCopula* Vine, double *U, double *V, unsigned int n)
 {
-    int l,i,j=0;
+    int i,j=0;
     
     int d = Vine->Dimension;
     
@@ -66,7 +66,7 @@ void VineCopulaGetPseudoObs(VineCopula* Vine, double *U, double *V, unsigned int
 
 void VineCopulaGetPseudoObs(VineCopula* Vine, double *U, double *H, double *V, unsigned int n)
 {
-    int l,i,j=0;
+    int i,j=0;
     
     int d = Vine->Dimension;
     

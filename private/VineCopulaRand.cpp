@@ -14,13 +14,13 @@ void VineCopulaRand(VineCopula* Vine, double *U, unsigned int n)
     
     boost::variate_generator <boost::mt19937&, boost::uniform_01 <> > RAND(gen,URAND);
     
-    unsigned int d = Vine->Dimension;
+    int d = Vine->Dimension;
     
     std::vector<double> W(d*n);
     
     for (j=0;j<d;j++)
     {
-        for (i=0;i<n;i++)
+        for (i=0;i<(int)n;i++)
         {
             W[j*n+i] = RAND();
             U[j*n+i] = W[j*n+i];

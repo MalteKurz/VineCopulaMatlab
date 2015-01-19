@@ -253,7 +253,7 @@ double SD_Kendall_Tau(double *U, double *V, unsigned int n)
     h2 = Concordant + Discordant + ExtraY;
     double h3 = Concordant - Discordant;
     
-    tau = (Concordant - Discordant)/sqrt(h1*h2);
+    tau = h3/sqrt(h1*h2);
     
     return tau;
 }

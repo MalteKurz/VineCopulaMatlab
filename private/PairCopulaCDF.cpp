@@ -106,7 +106,7 @@ void PairCopulaCDF(int family, const double *theta, double *U, double *V, double
         case 4:
         {
             // BB6
-            double h1,h2,h3,h4,h5,h6;
+            double h1,h2;
             
             h1 = 1/theta[0];
             h2 = 1/theta[1];
@@ -216,7 +216,7 @@ void PairCopulaCDF(int family, const double *theta, double *U, double *V, double
         case 9:
         {
             // Frank
-            double h1,h2,h3,h4,UU,VV;
+            double h1,h2,h3,UU,VV;
             
             h1 = -*theta;
             h2 = expm1(h1);
@@ -234,7 +234,7 @@ void PairCopulaCDF(int family, const double *theta, double *U, double *V, double
         case 10:
         {
             // Gaussian
-            double UU,VV,CORREL,ABSEPS=0.001,RELEPS=0,ERROR=0,rho;
+            double UU,VV,ABSEPS=0.001,RELEPS=0,ERROR=0,rho;
             int N=2,NU=0,MAXPTS=25000,INFORM;
             std::vector<double> ZeroArray(2), UPPER(2);
             std::vector<int> ZeroIntArray(2);
@@ -258,7 +258,7 @@ void PairCopulaCDF(int family, const double *theta, double *U, double *V, double
         case 11:
         {
             // Gumbel
-            double h1,h2,h3,h4,h5,h7,UU,VV;
+            double h1,h2,h3,h4,h5,UU,VV;
             
             h1 = 1/ *theta;
             
@@ -364,7 +364,12 @@ void PairCopulaCDF(int family, const double *theta, double *U, double *V, double
         {
             // Tawn1
             std::vector<double> U1(n);
-            for (i=0;i<n;i++) U1[i]=pow(U[i],theta[1]);
+            for (i=0;i<n;i++)
+            {
+                double UU;
+                UU = CheckBounds(U[i]);
+                U1[i]=pow(UU,theta[1]);
+            }
             
             PairCopulaCDF(11,theta,&U1[0],V,p,n);
             double h1;
@@ -373,9 +378,8 @@ void PairCopulaCDF(int family, const double *theta, double *U, double *V, double
             
             for (i=0;i<n;i++)
             {
-                double hu,UU,VV;
+                double hu,UU;
                 UU = CheckBounds(U[i]);
-                VV = CheckBounds(V[i]);
                 hu = pow(UU,h1);
                 
                 p[i] *= hu;
@@ -386,7 +390,12 @@ void PairCopulaCDF(int family, const double *theta, double *U, double *V, double
         {
             // Tawn2
             std::vector<double> V1(n);
-            for (i=0;i<n;i++) V1[i]=pow(V[i],theta[1]);
+            for (i=0;i<n;i++)
+            {
+                double VV;
+                VV = CheckBounds(V[i]);
+                V1[i]=pow(VV,theta[1]);
+            }
             
             PairCopulaCDF(11,theta,U,&V1[0],p,n);
             double h1;
@@ -395,8 +404,7 @@ void PairCopulaCDF(int family, const double *theta, double *U, double *V, double
             
             for (i=0;i<n;i++)
             {
-                double hv,UU,VV;
-                UU = CheckBounds(U[i]);
+                double hv,VV;
                 VV = CheckBounds(V[i]);
                 hv = pow(VV,h1);
                 
@@ -411,8 +419,11 @@ void PairCopulaCDF(int family, const double *theta, double *U, double *V, double
             std::vector<double> V1(n);
             for (i=0;i<n;i++) 
             {
-                U1[i]=pow(U[i],theta[1]);
-                V1[i]=pow(V[i],theta[2]);
+                double UU,VV;
+                UU = CheckBounds(U[i]);
+                VV = CheckBounds(V[i]);
+                U1[i]=pow(UU,theta[1]);
+                V1[i]=pow(VV,theta[2]);
             }
             
             PairCopulaCDF(11,theta,&U1[0],&V1[0],p,n);
@@ -436,7 +447,7 @@ void PairCopulaCDF(int family, const double *theta, double *U, double *V, double
         case 19:
         {
             // t
-            double UU,VV,CORREL,ABSEPS=0.001,RELEPS=0,ERROR=0,rho;
+            double UU,VV,ABSEPS=0.001,RELEPS=0,ERROR=0,rho;
             int N=2,nu,MAXPTS=25000,INFORM;
             std::vector<double> ZeroArray(2), UPPER(2);
             std::vector<int> ZeroIntArray(2);

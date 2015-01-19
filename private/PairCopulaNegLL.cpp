@@ -1,6 +1,6 @@
 #include "VineCPP_header.hpp"
 double PairCopulaNegLL_Rotated_Obs(int family, int rotation, const double *theta, double *U, double *V, unsigned int n)
-{     
+{
     switch(rotation){
         case 0: case 180:
         {
@@ -13,10 +13,11 @@ double PairCopulaNegLL_Rotated_Obs(int family, int rotation, const double *theta
             break;
         }
     }
+    return 0;
 }
 
 double PairCopulaNegLL(int family, int rotation, const double *theta, double *U, double *V, unsigned int n)
-{     
+{
     if(rotation>0)
     {
         Rotate_Obs(U,V,rotation,n);
@@ -34,11 +35,12 @@ double PairCopulaNegLL(int family, int rotation, const double *theta, double *U,
             break;
         }
     }
+    return 0;
 }
 
 double PairCopulaNegLL(int family, const double *theta, double *U, double *V, unsigned int n)
 {
-    int i;
+    unsigned int i;
     double CLL=0;
     
     switch(family){
@@ -89,37 +91,37 @@ double PairCopulaNegLL(int family, const double *theta, double *U, double *V, un
             }
             else
             {
-            //double h1,h2,h3,h4,h5,h6,h7,h8,h9,h10,h11,h12,hu,hv,huv,hhuv,UU,VV;
-            double h1,h2,h3,h4,h5,h6,h7,h8,h9,h10;
-            
-            h1 = -theta[0];
-            h2 = 1+theta[0];
-            h3 = 1/h1-2;
-            h4 = 1/ theta[1];
-            h5 = 2*h4-2;
-            h6 = theta[1] -1;
-            h7 = h1-1;
-            h8 = h3 + 1;
-            h9 = h4-2;
-            h10 = theta[0]*h6;
-            
-            //#pragma omp parallel for private(i) shared(CLL)
-            //#pragma omp parallel for private(i) reduction(-:CLL)
-            for (i=0;i<n;i++)
-            {
-                double h11,h12,hu,hv,huv,hhuv,UU,VV;
-                UU = CheckBounds(U[i]);
-                VV = CheckBounds(V[i]);
-                h11 = pow(UU,h1)-1;
-                h12 = pow(VV,h1)-1;
-                hu = pow(h11,theta[1]);
-                hv = pow(h12,theta[1]);
-                huv = hu + hv;
-                hhuv = 1+pow(huv,h4);
+                //double h1,h2,h3,h4,h5,h6,h7,h8,h9,h10,h11,h12,hu,hv,huv,hhuv,UU,VV;
+                double h1,h2,h3,h4,h5,h6,h7,h8,h9,h10;
                 
-                //#pragma omp atomic
-                CLL -= h6*(log(h11)+log(h12))+h7*(log(UU)+log(VV))+log(h2*pow(hhuv,h3)*pow(huv,h5)+(h10*pow(hhuv,h8)*pow(huv,h9)));
-            }
+                h1 = -theta[0];
+                h2 = 1+theta[0];
+                h3 = 1/h1-2;
+                h4 = 1/ theta[1];
+                h5 = 2*h4-2;
+                h6 = theta[1] -1;
+                h7 = h1-1;
+                h8 = h3 + 1;
+                h9 = h4-2;
+                h10 = theta[0]*h6;
+                
+                //#pragma omp parallel for private(i) shared(CLL)
+                //#pragma omp parallel for private(i) reduction(-:CLL)
+                for (i=0;i<n;i++)
+                {
+                    double h11,h12,hu,hv,huv,hhuv,UU,VV;
+                    UU = CheckBounds(U[i]);
+                    VV = CheckBounds(V[i]);
+                    h11 = pow(UU,h1)-1;
+                    h12 = pow(VV,h1)-1;
+                    hu = pow(h11,theta[1]);
+                    hv = pow(h12,theta[1]);
+                    huv = hu + hv;
+                    hhuv = 1+pow(huv,h4);
+                    
+                    //#pragma omp atomic
+                    CLL -= h6*(log(h11)+log(h12))+h7*(log(UU)+log(VV))+log(h2*pow(hhuv,h3)*pow(huv,h5)+(h10*pow(hhuv,h8)*pow(huv,h9)));
+                }
             }
             if (isinf(CLL)) CLL=log(DBL_MAX);
             if (isnan(CLL)) CLL=log(DBL_MAX);
@@ -205,7 +207,8 @@ double PairCopulaNegLL(int family, const double *theta, double *U, double *V, un
             else
             {
                 //double h1,h2,h3,h4,h5,hu,hv,huv,UU,VV;
-                double h1,h2,h3,h4,h5,CLLPos,CLLNeg;
+                //double h1,h2,h3,h4,h5,CLLPos,CLLNeg;
+                double h1,h2,h3,h4,h5;
                 
                 h1 = 1-theta[1];
                 h2 = pow(h1,theta[0]);
@@ -226,14 +229,13 @@ double PairCopulaNegLL(int family, const double *theta, double *U, double *V, un
                     hv = pow(1-tv,theta[0]);
                     huv = hu*hv-hu-hv;
                     
-                //#pragma omp atomic
-                        //CLL += log(tu-1)+log(tv-1)+log(pow(h2+huv,2))-(log(hu)+log(hv)+h4*log(1-h3*(1-hu)*(1-hv))+log(h5-huv));
-                        CLL -= log(hu*hv*pow(1-h3*(1-hu)*(1-hv),h4)*(h5-huv)/((theta[1]*UU-1)*(theta[1]*VV-1))/(pow(h2+huv,2)));
-                    //}
+                    //#pragma omp atomic
+                    //CLL += log(tu-1)+log(tv-1)+log(pow(h2+huv,2))-(log(hu)+log(hv)+h4*log(1-h3*(1-hu)*(1-hv))+log(h5-huv));
+                    CLL -= log(hu*hv*pow(1-h3*(1-hu)*(1-hv),h4)*(h5-huv)/((theta[1]*UU-1)*(theta[1]*VV-1))/(pow(h2+huv,2)));
                 }
                 CLL -= n*log(theta[1]);
-            if (isinf(CLL)) CLL=log(DBL_MAX);
-            if (isnan(CLL)) CLL=log(DBL_MAX);
+                if (isinf(CLL)) CLL=log(DBL_MAX);
+                if (isnan(CLL)) CLL=log(DBL_MAX);
             }
             break;
         }
@@ -332,7 +334,7 @@ double PairCopulaNegLL(int family, const double *theta, double *U, double *V, un
                 
                 //x = gsl_cdf_ugaussian_Pinv(UU);
                 //y = gsl_cdf_ugaussian_Pinv(VV);
-
+                
                 CLL -= h3*x*y-h2*(pow(x,2)+pow(y,2));
             }
             CLL += n/2*log(h1);
@@ -522,7 +524,7 @@ double PairCopulaNegLL(int family, const double *theta, double *U, double *V, un
         {
             // Tawn
             //double h1,h2,h3,h4,hu,hv,h2g,h41,h42,h412,h41d,h42d,h4g,h4g1,h5g,h5g1,h6g,h7g,h8g,h9g,h10g,UU,VV;
-            double h1,h2,h3,h4,h2g,h41,h42,h412,h41d,h42d;
+            double h1,h2,h3,h2g,h41,h42,h412,h41d,h42d;
             
             h1 = theta[0]-1;
             h2 = (1-theta[0])/ theta[0];

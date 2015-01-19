@@ -61,7 +61,7 @@ struct VineCopula{
         
         NumbParams.resize((dimension-1)*dimension/2+1);
             
-        unsigned int i;
+        int i;
         for (i=0;i<(dimension-1)*dimension/2;i++)
         {
             switch((int) families[i]){
@@ -98,7 +98,7 @@ struct VineCopula{
         
         NumbParams.resize((dimension-1)*dimension/2+1);
             
-        unsigned int i;
+        int i;
         for (i=0;i<(dimension-1)*dimension/2;i++)
         {
             switch((int) families[i]){
