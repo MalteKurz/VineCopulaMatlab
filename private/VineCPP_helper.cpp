@@ -30,7 +30,7 @@ void Rotate_Obs(double *U,double *V, int rotation, unsigned int n)
         }
         default:
         {
-            mexErrMsgTxt( "Unknown rotation degree. Please choose either 0, 90, 180 or 270.");
+            //mexErrMsgTxt( "Unknown rotation degree. Please choose either 0, 90, 180 or 270.");
         }
     }
 }
@@ -73,7 +73,7 @@ void Rotate_Obs(double *U, double *V, double *U1, double *V1,int rotation, unsig
         }
         default:
         {
-            mexErrMsgTxt( "Unknown rotation degree. Please choose either 0, 90, 180 or 270.");
+            //mexErrMsgTxt( "Unknown rotation degree. Please choose either 0, 90, 180 or 270.");
         }
     }
 }

@@ -457,7 +457,7 @@ void PairCopulaCDF(int family, const double *theta, double *U, double *V, double
             
             if (nu != theta[1])
             {
-                mexErrMsgTxt( "The CDF of the t copula is only implemented for integer valued degrees of freedom. Call the build-in MATLAB function copulacdf instead.");
+                //mexErrMsgTxt( "The CDF of the t copula is only implemented for integer valued degrees of freedom. Call the build-in MATLAB function copulacdf instead.");
             }
             
             boost::math::students_t dist(theta[1]);

@@ -329,7 +329,7 @@ void PairCopulaFit(double *theta,int family, double *U,double *V,unsigned int n)
             opt.optimize(x, minf);
         }
         catch(nlopt::roundoff_limited) {
-            mexWarnMsgTxt("Halted because roundoff errors limited progress.");
+            //mexWarnMsgTxt("Halted because roundoff errors limited progress.");
         }
 
         
