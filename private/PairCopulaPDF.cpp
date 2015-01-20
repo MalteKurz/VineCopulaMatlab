@@ -213,7 +213,7 @@ void PairCopulaPDF(int family, const double *theta, double *U, double *V, double
                 
                 for (i=0;i<n;i++)
                 {
-                    double h6,hu,hv,huv,UU,VV;
+                    double hu,hv,huv,UU,VV;
                     UU = CheckBounds(U[i]);
                     VV = CheckBounds(V[i]);
                     hu = pow(1-theta[1]*UU,theta[0]);
@@ -506,7 +506,7 @@ void PairCopulaPDF(int family, const double *theta, double *U, double *V, double
         {
             // Tawn
             //double h1,h2,h3,h4,hu,hv,h2g,h41,h42,h412,h41d,h42d,h4g,h4g1,h5g,h5g1,h6g,h7g,h8g,h9g,h10g,UU,VV;
-            double h1,h2,h3,h4,h2g,h41,h42,h412,h41d,h42d;
+            double h1,h2,h3,h2g,h41,h42,h412,h41d,h42d;
             
             h1 = theta[0]-1;
             h2 = (1-theta[0])/ theta[0];
