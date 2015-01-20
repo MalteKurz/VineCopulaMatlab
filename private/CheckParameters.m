@@ -47,7 +47,7 @@ for i = 1:NumbPCs
             [lb,ub] = PairCopulaParameterBounds(families(i));
             for j=1:2
                 if sum(theta(k) < lb(j)) > 0 || sum(theta(k) > ub(j)) > 0
-                    throwAsCaller(MException('',['The ' num2str(j) '. parameter of the ' family ' copula has to lie between ' num2str(lb(j)) ' and ' num2str(ub(j)) '.']))
+                    throwAsCaller(MException('',['The ' num2str(j) '. parameter of copula family number ' num2str(families(i)) ' has to lie between ' num2str(lb(j)) ' and ' num2str(ub(j)) '.']))
                 end
                 k=k+1;
             end
@@ -56,7 +56,7 @@ for i = 1:NumbPCs
             [lb,ub] = PairCopulaParameterBounds(families(i));
             for j=1:3
                 if sum(theta(k) < lb(j)) > 0 || sum(theta(k) > ub(j)) > 0
-                    throwAsCaller(MException('',['The ' num2str(j) '. parameter of the ' family ' copula has to lie between ' num2str(lb(j)) ' and ' num2str(ub(j)) '.']))
+                    throwAsCaller(MException('',['The ' num2str(j) '. parameter of copula family number ' num2str(families(i)) ' has to lie between ' num2str(lb(j)) ' and ' num2str(ub(j)) '.']))
                 end
                 k=k+1;
             end
@@ -66,7 +66,7 @@ for i = 1:NumbPCs
         otherwise
             [lb,ub] = PairCopulaParameterBounds(families(i));
             if sum(theta(k) < lb) > 0 || sum(theta(k) > ub) > 0
-                throwAsCaller(MException('',['The 1. parameter of copula family ' num2str(families(i)) ' has to lie between ' num2str(lb) ' and ' num2str(ub) '.']))
+                throwAsCaller(MException('',['The 1. parameter of copula family number ' num2str(families(i)) ' has to lie between ' num2str(lb) ' and ' num2str(ub) '.']))
             end
             k=k+1;
             
