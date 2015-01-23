@@ -40,7 +40,7 @@ function [lb,ub] = PairCopulaParameterBounds(families)
 Path = mfilename('fullpath');
 Path = Path(1:end-length(mfilename)-1);
 
-bounds = dlmread([Path '/private/bounds.txt']);
+bounds = dlmread([Path '/src/bounds.txt']);
 
 if ischar(families)
     families = {families};

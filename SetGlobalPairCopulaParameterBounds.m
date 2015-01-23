@@ -38,9 +38,9 @@ function SetGlobalPairCopulaParameterBounds
 Path = mfilename('fullpath');
 Path = Path(1:end-length(mfilename)-1);
 
-bounds = dlmread([Path '/private/bounds.txt']);
-bounds_extreme = dlmread([Path '/private/bounds_extreme.txt']);
-bounds_default = dlmread([Path '/private/bounds_default.txt']);
+bounds = dlmread([Path '/src/bounds.txt']);
+bounds_extreme = dlmread([Path '/src/bounds_extreme.txt']);
+bounds_default = dlmread([Path '/src/bounds_default.txt']);
 bounds(1,:) = [];
 bounds_extreme(1,:) = [];
 bounds_default(1,:) = [];
@@ -387,7 +387,7 @@ set(f,'CloseRequestFcn',@Close_Callback)
         set(0,'DefaultUicontrolFontSize',fs);
         if strcmp(button,'Yes')
             bounds = [zeros(1,6);bounds];
-            dlmwrite([Path '/private/bounds.txt'],bounds,'\t')
+            dlmwrite([Path '/src/bounds.txt'],bounds,'\t')
             bounds(1,:) = [];
             bounds_old = bounds;
         end
@@ -402,7 +402,7 @@ set(f,'CloseRequestFcn',@Close_Callback)
             set(0,'DefaultUicontrolFontSize',fs);
             if strcmp(button,'Yes')
             bounds = [zeros(1,6);bounds];
-            dlmwrite([Path '/private/bounds.txt'],bounds,'\t')
+            dlmwrite([Path '/src/bounds.txt'],bounds,'\t')
             end
         end
         delete(gcf)

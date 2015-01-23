@@ -1,0 +1,5 @@
+# Vim temporary files
+*~
+
+# Compiled mex files
+*.mexa64

@@ -1,4 +1,6 @@
 #include "VineCPP_header.hpp"
+#include <matrix.h>
+#include <mex.h>
 
 // Helper function: Compare two pairs of doubles
 bool UV_sorter(std::pair<double, double> const& lhs, std::pair<double, double> const& rhs) {
