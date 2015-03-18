@@ -9,7 +9,7 @@
         
         <link rel="shortcut icon" href="./img/favicon.ico">
 
-        <title>VineCPP</title>
+        <title>VineCopulaMatlab</title>
 
         <link href="./css/bootstrap-custom.min.css" rel="stylesheet">
         <link href="./css/font-awesome-4.0.3.css" rel="stylesheet">
@@ -43,7 +43,7 @@
             
 
             <!-- Main title -->
-            <a class="navbar-brand" href=".">VineCPP</a>
+            <a class="navbar-brand" href=".">VineCopulaMatlab</a>
         </div>
 
         <!-- Expanded navigation -->
@@ -165,7 +165,7 @@
                 
                 
                     <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">The VineCopula class <b class="caret"></b></a>
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">VineCopula class <b class="caret"></b></a>
                         <ul class="dropdown-menu">
                         
                             <li >
@@ -217,7 +217,7 @@
                 
                 
                 <li>
-                    <a href="https://github.com/MalteKurz/VineCPP">
+                    <a href="https://github.com/MalteKurz/VineCopulaMatlab">
                         
                             <i class="fa fa-github"></i>
                         
@@ -235,11 +235,13 @@
             <div class="col-md-3"><div class="bs-sidebar hidden-print affix well" role="complementary">
     <ul class="nav bs-sidenav">
     
-        <li class="main active"><a href="#vine-copulas-with-c-vinecpp-toolbox">Vine Copulas with C++ (VineCPP) toolbox</a></li>
+        <li class="main active"><a href="#vinecopulamatlab-toolbox">VineCopulaMatlab toolbox</a></li>
         
-            <li><a href="#description-of-the-vine-copulas-with-c-vinecpp-toolbox">Description of the Vine Copulas with C++ (VineCPP) toolbox</a></li>
+            <li><a href="#description-of-the-vine-copulas-with-c-toolbox">Description of the Vine Copulas with C++ toolbox</a></li>
         
             <li><a href="#highlights">Highlights</a></li>
+        
+            <li><a href="#hosting-and-bug-reporting">Hosting and bug reporting</a></li>
         
             <li><a href="#demo">Demo</a></li>
         
@@ -254,11 +256,11 @@
 </div></div>
             <div class="col-md-9" role="main">
 
-<h1 id="vine-copulas-with-c-vinecpp-toolbox">Vine Copulas with C++ (VineCPP) toolbox</h1>
+<h1 id="vinecopulamatlab-toolbox">VineCopulaMatlab toolbox</h1>
 <hr />
-<p>A <strong>MATLAB toolbox</strong> for vine copulas based on C++</p>
+<p>A <strong>MATLAB toolbox</strong> for vine copulas based on the C++ shared library VineCopulaCPP</p>
 <hr />
-<h2 id="description-of-the-vine-copulas-with-c-vinecpp-toolbox">Description of the Vine Copulas with C++ (VineCPP) toolbox</h2>
+<h2 id="description-of-the-vine-copulas-with-c-toolbox">Description of the Vine Copulas with C++ toolbox</h2>
 <p>The toolbox can be used for high-dimensional dependence modeling with vine copula models. A key feature of the toolbox is a framework, which allows to test whether the simplifying assumption is a reasonable assumption for approximating high-dimensional distributions using simplified vine copula models.</p>
 <h2 id="highlights">Highlights</h2>
 <ul>
@@ -270,6 +272,12 @@
 <li>Functions for (jointly-)estimating C- and D-vine copula models.</li>
 <li>A vectorial independence test, which can be used for testing sequentially the simplified assumption for C- and D-vine copulas.</li>
 <li>Most computations are implemented in C++. Parts can be optionally performed parallel.</li>
+</ul>
+<h2 id="hosting-and-bug-reporting">Hosting and bug reporting</h2>
+<ul>
+<li>The VineCopulaMatlab toolbox is hosted at GitHub and can be found under <a href="https://github.com/MalteKurz/VineCopulaMatlab">https://github.com/MalteKurz/VineCopulaMatlab</a>.</li>
+<li>The C++ shared library VineCopulaCPP is also hosted at GitHub and can be found under <a href="https://github.com/MalteKurz/VineCopulaCPP">https://github.com/MalteKurz/VineCopulaCPP</a>.</li>
+<li>Please use GitHub issues (<a href="https://github.com/MalteKurz/VineCopulaMatlab/issues">VineCopulaMatlab issues</a> and <a href="https://github.com/MalteKurz/VineCopulaCPP/issues">VineCopulaCPP issues</a> for reporting any issues or bugs.</li>
 </ul>
 <h2 id="demo">Demo</h2>
 <p>Please see the <a href="DemoVineCPP/">demo</a> for further details about the functionality of the VineCPP toolbox.</p>
@@ -289,6 +297,7 @@
 <li>The nonlinear optimization library <strong>NLopt</strong> (http://ab-initio.mit.edu/wiki/index.php/NLopt).</li>
 <li><strong>OpenMP</strong> for parallel computing (http://openmp.org/wp/).</li>
 <li>The Fortran 77 routine <strong>MVTDST</strong> (file mvtdstpack.f) from (http://www.math.wsu.edu/faculty/genz/software/software.html; Alan Genz). (It is only needed for computing the CDF of the bivariate normal and t copula.)</li>
+<li>The C++ library <strong>VineCopulaCPP</strong> (https://github.com/MalteKurz/VineCopulaCPP).</li>
 </ul>
 <h2 id="references">References</h2>
 <p>[1]  Aas, K., C. Czado, A. Frigessi and H. Bakken (2009), "Pair-copula constructions of multiple dependence", Insurance: Mathematics and Economics 44(2), pp. 182-198.</p>

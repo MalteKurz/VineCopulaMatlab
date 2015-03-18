@@ -9,7 +9,7 @@
         
         <link rel="shortcut icon" href="../img/favicon.ico">
 
-        <title>Installation - VineCPP</title>
+        <title>Installation - VineCopulaMatlab</title>
 
         <link href="../css/bootstrap-custom.min.css" rel="stylesheet">
         <link href="../css/font-awesome-4.0.3.css" rel="stylesheet">
@@ -43,7 +43,7 @@
             
 
             <!-- Main title -->
-            <a class="navbar-brand" href="..">VineCPP</a>
+            <a class="navbar-brand" href="..">VineCopulaMatlab</a>
         </div>
 
         <!-- Expanded navigation -->
@@ -165,7 +165,7 @@
                 
                 
                     <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">The VineCopula class <b class="caret"></b></a>
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">VineCopula class <b class="caret"></b></a>
                         <ul class="dropdown-menu">
                         
                             <li >
@@ -217,7 +217,7 @@
                 
                 
                 <li>
-                    <a href="https://github.com/MalteKurz/VineCPP">
+                    <a href="https://github.com/MalteKurz/VineCopulaMatlab">
                         
                             <i class="fa fa-github"></i>
                         
@@ -239,7 +239,7 @@
         
             <li><a href="#dependencies">Dependencies</a></li>
         
-            <li><a href="#getting-started-setting-up-the-vinecpp-toolbox">Getting started / Setting up the VineCPP toolbox</a></li>
+            <li><a href="#getting-started-setting-up-the-vinecopulamatlab-toolbox">Getting started / Setting up the VineCopulaMatlab toolbox</a></li>
         
             <li><a href="#remarks">Remarks</a></li>
         
@@ -247,7 +247,7 @@
         <li class="main "><a href="#handling-of-seeds-for-random-number-generation">Handling of seeds for random number generation</a></li>
         
     
-        <li class="main "><a href="#parallel-computing-within-the-vinecpp-toolbox-using-openmp">Parallel computing within the VineCPP toolbox using OpenMP</a></li>
+        <li class="main "><a href="#parallel-computing-within-the-vinecopulamatlab-toolbox-using-openmp">Parallel computing within the VineCopulaMatlab toolbox using OpenMP</a></li>
         
     
     </ul>
@@ -256,7 +256,7 @@
 
 <hr />
 <h1 id="installation">Installation</h1>
-<p>For using the VineCPP toolbox you should first check whether all dependencies are installed.</p>
+<p>For using the VineCopulaMatlab toolbox you should first check whether all dependencies are installed.</p>
 <h2 id="dependencies">Dependencies</h2>
 <ul>
 <li>A <strong>C++-compiler</strong> being compatible with the used MATLAB release (cf.
@@ -277,14 +277,29 @@ $ dpkg -s libnlopt-dev | grep 'Version'
 dpkg -s libgomp1 | grep 'Version'
 4.8.2-19ubuntu1
 </code></pre>
-<h2 id="getting-started-setting-up-the-vinecpp-toolbox">Getting started / Setting up the VineCPP toolbox</h2>
+<h2 id="getting-started-setting-up-the-vinecopulamatlab-toolbox">Getting started / Setting up the VineCopulaMatlab toolbox</h2>
 <ol>
 <li>Check whether you have a compatible <strong>C++ compiler</strong> (cf. http://www.mathworks.de/support/compilers for information about compatible compilers for different releases and operating systems). By the command mex -setup the compiler can be set.</li>
-<li>Install the C++ libraries <strong>boost</strong> (cf. http://www.boost.org/).</li>
-<li>Install the nonlinear optimization library <strong>NLopt</strong> (http://ab-initio.mit.edu/wiki/index.php/NLopt).</li>
-<li>Optionally parallel computing with <strong>OpenMP</strong> can be used. Note that your C++ compiler needs to support parallel computing with OpenMP.</li>
-<li>Download the Fortran 77 routine <strong>MVTDST</strong> (file mvtdstpack.f) from (http://www.math.wsu.edu/faculty/genz/software/software.html; Alan Genz). (It is only needed for computing the CDF of the bivariate normal and t copula.)</li>
-<li>Install the VineCPP toolbox by executing the installVineCPP function.</li>
+<li>
+<p>Install the C++ libraries <strong>boost</strong> (cf. http://www.boost.org/).</p>
+<p><code>$ apt-get install libboost-all-dev</code></p>
+</li>
+<li>
+<p>Install the nonlinear optimization library <strong>NLopt</strong> (http://ab-initio.mit.edu/wiki/index.php/NLopt).</p>
+<p><code>$ apt-get install libnlopt-dev</code></p>
+</li>
+<li>
+<p>Optionally parallel computing with <strong>OpenMP</strong> can be used. Note that your C++ compiler needs to support parallel computing with OpenMP.</p>
+<p><code>$ apt-get install libgomp1</code></p>
+</li>
+<li>
+<p>Change the path to the directory you have saved the VineCopulaMatlab folder, i.e.,</p>
+<p><code>$ cd [path]/VineCopulaMatlab</code></p>
+</li>
+<li>
+<p>Install the VineCopulaMatlab toolbox using the make command.</p>
+<p><code>$ make</code></p>
+</li>
 </ol>
 <h2 id="remarks">Remarks</h2>
 <ul>
@@ -319,7 +334,7 @@ dpkg -s libgomp1 | grep 'Version'
            http://www.boost.org/doc/libs/1_56_0/doc/html/boost_random/reference.html</li>
 </ul>
 <hr />
-<h1 id="parallel-computing-within-the-vinecpp-toolbox-using-openmp">Parallel computing within the VineCPP toolbox using OpenMP</h1>
+<h1 id="parallel-computing-within-the-vinecopulamatlab-toolbox-using-openmp">Parallel computing within the VineCopulaMatlab toolbox using OpenMP</h1>
 <p>The following functions can be (partly) computed in parallel:</p>
 <ul>
 <li>PairCopulaSelect</li>
