@@ -1,5 +1,5 @@
-site_name: VineCPP
-repo_url: https://github.com/MalteKurz/VineCPP
+site_name: VineCopulaMatlab
+repo_url: https://github.com/MalteKurz/VineCopulaMatlab
 pages:
 - ['index.md', 'Home']
 
@@ -27,11 +27,11 @@ pages:
 - ['Functions/VineCopulaNegLL.md', 'Functions for vine copula', 'VineCopulaNegLL']
 - ['Functions/VineCopulaRand.md', 'Functions for vine copula', 'VineCopulaRand']
 
-- ['Functions/VineCopula.md', 'The VineCopula class', 'VineCopula class']
-- ['Functions/VineCopula_Constructor.md', 'The VineCopula class', 'Constructor']
-- ['Functions/VineCopula_Fit.md', 'The VineCopula class', 'Fit']
-- ['Functions/VineCopula_SeqTestOnSimplified.md', 'The VineCopula class', 'SeqTestOnSimplified']
-- ['Functions/VineCopula_Sim.md', 'The VineCopula class', 'Sim']
-- ['Functions/VineCopula_StructureSelect.md', 'The VineCopula class', 'StructureSelect']
+- ['Functions/VineCopula.md', 'VineCopula class', 'VineCopula class']
+- ['Functions/VineCopula_Constructor.md', 'VineCopula class', 'Constructor']
+- ['Functions/VineCopula_Fit.md', 'VineCopula class', 'Fit']
+- ['Functions/VineCopula_SeqTestOnSimplified.md', 'VineCopula class', 'SeqTestOnSimplified']
+- ['Functions/VineCopula_Sim.md', 'VineCopula class', 'Sim']
+- ['Functions/VineCopula_StructureSelect.md', 'VineCopula class', 'StructureSelect']
 
 

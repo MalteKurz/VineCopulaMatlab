@@ -3,7 +3,7 @@
 
 # Installation
 
-For using the VineCPP toolbox you should first check whether all dependencies are installed.
+For using the VineCopulaMatlab toolbox you should first check whether all dependencies are installed.
 
 ## Dependencies
   * A **C++-compiler** being compatible with the used MATLAB release (cf.
@@ -25,13 +25,27 @@ With the following code you can check whether you have installed the needed soft
     dpkg -s libgomp1 | grep 'Version'
     4.8.2-19ubuntu1
 
-## Getting started / Setting up the VineCPP toolbox
+## Getting started / Setting up the VineCopulaMatlab toolbox
  1. Check whether you have a compatible **C++ compiler** (cf. http://www.mathworks.de/support/compilers for information about compatible compilers for different releases and operating systems). By the command mex -setup the compiler can be set.
  2. Install the C++ libraries **boost** (cf. http://www.boost.org/).
+ 
+    ```$ apt-get install libboost-all-dev```
+ 
  3. Install the nonlinear optimization library **NLopt** (http://ab-initio.mit.edu/wiki/index.php/NLopt).
+ 
+    ```$ apt-get install libnlopt-dev```
+ 
  4. Optionally parallel computing with **OpenMP** can be used. Note that your C++ compiler needs to support parallel computing with OpenMP.
- 5. Download the Fortran 77 routine **MVTDST** (file mvtdstpack.f) from (http://www.math.wsu.edu/faculty/genz/software/software.html; Alan Genz). (It is only needed for computing the CDF of the bivariate normal and t copula.)
- 6. Install the VineCPP toolbox by executing the installVineCPP function.
+ 
+    ```$ apt-get install libgomp1```
+ 
+ 5. Change the path to the directory you have saved the VineCopulaMatlab folder, i.e.,
+ 
+    ```$ cd [path]/VineCopulaMatlab```
+ 
+ 6. Install the VineCopulaMatlab toolbox using the make command.
+ 
+    ```$ make```
   
 ## Remarks  
   * Especially if you are not working with an UNIX operating system you may
@@ -67,7 +81,7 @@ With the following code you can check whether you have installed the needed soft
 
 ---
 
-# Parallel computing within the VineCPP toolbox using OpenMP
+# Parallel computing within the VineCopulaMatlab toolbox using OpenMP
 The following functions can be (partly) computed in parallel:
 
 * PairCopulaSelect

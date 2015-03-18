@@ -1,9 +1,9 @@
-# Vine Copulas with C++ (VineCPP) toolbox
+# VineCopulaMatlab toolbox
 ___________________________________________________________________________
-A **MATLAB toolbox** for vine copulas based on C++
+A **MATLAB toolbox** for vine copulas based on the C++ shared library VineCopulaCPP
 ___________________________________________________________________________
 
-## Description of the Vine Copulas with C++ (VineCPP) toolbox
+## Description of the Vine Copulas with C++ toolbox
 The toolbox can be used for high-dimensional dependence modeling with vine copula models. A key feature of the toolbox is a framework, which allows to test whether the simplifying assumption is a reasonable assumption for approximating high-dimensional distributions using simplified vine copula models.
 
 ## Highlights
@@ -16,8 +16,13 @@ The toolbox can be used for high-dimensional dependence modeling with vine copul
   * A vectorial independence test, which can be used for testing sequentially the simplified assumption for C- and D-vine copulas.
   * Most computations are implemented in C++. Parts can be optionally performed parallel.
 
+## Hosting and bug reporting
+  * The VineCopulaMatlab toolbox is hosted at GitHub and can be found under [https://github.com/MalteKurz/VineCopulaMatlab](https://github.com/MalteKurz/VineCopulaMatlab).
+  * The C++ shared library VineCopulaCPP is also hosted at GitHub and can be found under [https://github.com/MalteKurz/VineCopulaCPP](https://github.com/MalteKurz/VineCopulaCPP).
+  * Please use GitHub issues ([VineCopulaMatlab issues](https://github.com/MalteKurz/VineCopulaMatlab/issues) and [VineCopulaCPP issues](https://github.com/MalteKurz/VineCopulaCPP/issues) for reporting any issues or bugs.
+
 ## Demo
-Please see the [demo](http://maltekurz.github.io/VineCPP/DemoVineCPP/) for further details about the functionality of the VineCPP toolbox.
+Please see the [demo](http://maltekurz.github.io/VineCopulaMatlab/DemoVineCPP/) for further details about the functionality of the VineCPP toolbox.
 
 ## Remarks
   * The central class of the toolbox is the VineCopula class. Working with this class, for most input variables consistency checks are performed.
@@ -33,6 +38,7 @@ Please see the [demo](http://maltekurz.github.io/VineCPP/DemoVineCPP/) for furth
   * The nonlinear optimization library **NLopt** (http://ab-initio.mit.edu/wiki/index.php/NLopt).
   * **OpenMP** for parallel computing (http://openmp.org/wp/).
   * The Fortran 77 routine **MVTDST** (file mvtdstpack.f) from (http://www.math.wsu.edu/faculty/genz/software/software.html; Alan Genz). (It is only needed for computing the CDF of the bivariate normal and t copula.)
+  * The C++ library VineCopulaCPP (https://github.com/MalteKurz/VineCopulaCPP).
  
 ## References
  [1]  Aas, K., C. Czado, A. Frigessi and H. Bakken (2009), "Pair-copula constructions of multiple dependence", Insurance: Mathematics and Economics 44(2), pp. 182-198.
