@@ -17,7 +17,7 @@ void mexFunction(int nlhs, mxArray *plhs[], int nrhs, const mxArray *prhs[])
     Family = mxGetPr(prhs[0]);
     family = (int) *Family;
     
-// Depending on the family associate outputs and upper and lower bounds
+// Depending on the family associate outputs
     switch(family){
         case 18:
         {
