@@ -1,4 +1,4 @@
-#include "VineCPP_header.hpp"
+#include "VineCopulaCPP_header.hpp"
 #include <matrix.h>
 #include <mex.h>
 
@@ -8,7 +8,7 @@ void mexFunction(int nlhs, mxArray *plhs[], int nrhs, const mxArray *prhs[])
     double *U, *families, *thetas, *rotation;
     double *Type, *N, *D;
     int type;
-    unsigned int i, n, d;
+    unsigned int n, d;
     
 //associate inputs
     Type = mxGetPr(prhs[0]);

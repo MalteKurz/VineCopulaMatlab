@@ -13,7 +13,10 @@ For using the VineCopulaMatlab toolbox you should first check whether all depend
   * The nonlinear optimization library **NLopt** (http://ab-initio.mit.edu/wiki/index.php/NLopt).
   * **OpenMP** for parallel computing (http://openmp.org/wp/).
   * The Fortran 77 routine **MVTDST** (file mvtdstpack.f) from (http://www.math.wsu.edu/faculty/genz/software/software.html; Alan Genz). (It is only needed for computing the CDF of the bivariate normal and t copula.)
-  
+
+---
+
+# Installation under linux
 With the following code you can check whether you have installed the needed software (C++ compiler, boost libraries, NLopt and OpenMP) on your UNIX system.
 
     $ dpkg -s g++ | grep 'Version'
@@ -43,24 +46,46 @@ With the following code you can check whether you have installed the needed soft
  
     ```$ cd [path]/VineCopulaMatlab```
  
- 6. Install the VineCopulaMatlab toolbox using the make command.
+ 6. Build the VineCopulaMatlab toolbox using the make command.
  
     ```$ make```
-  
-## Remarks  
-  * Especially if you are not working with an UNIX operating system you may
-    get errors when compiling the C++ files during the execution of the
-    installVineCPP function. You may have to add the path of the installation
-    of the boost libraries by changing line 63 of the installVineCPP function
-    from eval(['mex ' CPP_files{i}]) to eval(['mex -I''pathname'' ' CPP_files{i}]) , where pathname is replaced by the path of the boost libraries.
+    
+ 7. Install the VineCopulaMatlab toolbox using the make command.
+ 
+    ```$ sudo make install```
+ 
+---
+   
+# Installation under Windows
+
+## Setting up a C++ build environment for Windows
+A nice step-by-step guidance can be found at [ascend4.org](http://ascend4.org/Setting_up_a_MinGW-w64_build_environment). Following the steps for setting up *MSYS*, *Switchable 32- and 64-bit modes* and *MinGW-w64* you will get a GCC (*TDM-GCC MinGW-w64*) for Windows including a command window. It also includes [OpenMP](http://openmp.org/wp/) for parallel computing.
+## Getting started / Setting up the VineCopulaMatlab toolbox
+ 1. Download the `mex_C++_mingw-w64.xml` file from [Chappjc's GitHub folder MATLAB](https://github.com/chappjc/MATLAB/tree/master/MinGW). Open the file and add `-fopenmp -lgfortran -lgomp -lnlopt -lVineCopulaCPP ` at the end of line 67 (definition of the variable `LINKLIBS`) directly after `-lmex -lmx -leng -lmat -lmwlapack -lmwblas `. Save the file `mex_C++_mingw-w64.xml` in the `private` folder of the VineCopulaMatlab toolbox.
+ 2. The C++ libraries boost (cf. http://www.boost.org/) don't need to be build. Just add the include directory when building the toolbox.
+ 3. The [nonlinear optimization library NLopt](http://ab-initio.mit.edu/wiki/index.php/NLopt). If you have set up MingGW-w64 you can just follow the installation guidance, i.e.,
+ 
+        ./configure --prefix=Installation_Dir
+        make
+        make install
+        
+ 4. Build the VineCopulaMatlab toolbox using the make command. You may have to set the boostincludedir option. If the boost libraries files are in the folder `C:\BoostDir`, then you may set boostincludedir to /c/BoostDir.
+ 
+    ```$ make boostincludedir=/c/BoostDir```
+    
+ 5. Install the VineCopulaMatlab toolbox using the make command. Depending on the installation directory (set as prefix) you may need to run msys as admin. You may have to set the prefix and boostincludedir options. If you set prefix to `/c/Dir` the library files will be placed in `C:\Dir\lib` and the include files will be placed in `C:\Dir\include`. Additionally you may want to specify the variables `mingwroot` (default value = "C:\\MinGW\\64") and `mingw_mex_xml` (default value = "mex_C++_mingw-w64.xml"), which specify where you have installed MinGW-w64 and how your mex setup file is called.
+ 
+    ```$ make install prefix=/c/Dir boostincludedir=/c/BoostDir```
+         
+## Remarks
   * For some C++ compilers the function expm1 is not available. A
     possible workaround is to use the expm1 from the boost libraries.
-    Therefore, add the line #include <boost/math/special_functions/expm1.hpp> 
-    to the header file VineCPP_header.hpp. Then substitute expm1 by boost::math::expm1.
+    Therefore, add the line #include <boost/math/special_functions/expm1.hpp\> 
+    to the header file VineCopulaCPP_header.hpp. Then substitute expm1 by boost::math::expm1.
   * The function lgamma is also not available in some C++ compilers. A
     possible workaround is to use the lgamma function from the boost libraries.
-    Therefore, add the line #include <boost/math/special_functions/gamma.hpp> 
-    to the header file VineCPP_header.hpp. Then substitute lgamma
+    Therefore, add the line #include <boost/math/special_functions/gamma.hpp\> 
+    to the header file VineCopulaCPP_header.hpp. Then substitute lgamma
     by boost::math::lgamma.
     
 ---
