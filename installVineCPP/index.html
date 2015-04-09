@@ -239,7 +239,17 @@
         
             <li><a href="#dependencies">Dependencies</a></li>
         
+    
+        <li class="main "><a href="#installation-under-linux">Installation under linux</a></li>
+        
             <li><a href="#getting-started-setting-up-the-vinecopulamatlab-toolbox">Getting started / Setting up the VineCopulaMatlab toolbox</a></li>
+        
+    
+        <li class="main "><a href="#installation-under-windows">Installation under Windows</a></li>
+        
+            <li><a href="#setting-up-a-c-build-environment-for-windows">Setting up a C++ build environment for Windows</a></li>
+        
+            <li><a href="#getting-started-setting-up-the-vinecopulamatlab-toolbox_1">Getting started / Setting up the VineCopulaMatlab toolbox</a></li>
         
             <li><a href="#remarks">Remarks</a></li>
         
@@ -267,6 +277,8 @@
 <li><strong>OpenMP</strong> for parallel computing (http://openmp.org/wp/).</li>
 <li>The Fortran 77 routine <strong>MVTDST</strong> (file mvtdstpack.f) from (http://www.math.wsu.edu/faculty/genz/software/software.html; Alan Genz). (It is only needed for computing the CDF of the bivariate normal and t copula.)</li>
 </ul>
+<hr />
+<h1 id="installation-under-linux">Installation under linux</h1>
 <p>With the following code you can check whether you have installed the needed software (C++ compiler, boost libraries, NLopt and OpenMP) on your UNIX system.</p>
 <pre class="prettyprint well"><code>$ dpkg -s g++ | grep 'Version'
 4:4.8.2-1ubuntu6
@@ -297,25 +309,48 @@ dpkg -s libgomp1 | grep 'Version'
 <p><code>$ cd [path]/VineCopulaMatlab</code></p>
 </li>
 <li>
-<p>Install the VineCopulaMatlab toolbox using the make command.</p>
+<p>Build the VineCopulaMatlab toolbox using the make command.</p>
 <p><code>$ make</code></p>
+</li>
+<li>
+<p>Install the VineCopulaMatlab toolbox using the make command.</p>
+<p><code>$ sudo make install</code></p>
+</li>
+</ol>
+<hr />
+<h1 id="installation-under-windows">Installation under Windows</h1>
+<h2 id="setting-up-a-c-build-environment-for-windows">Setting up a C++ build environment for Windows</h2>
+<p>A nice step-by-step guidance can be found at <a href="http://ascend4.org/Setting_up_a_MinGW-w64_build_environment">ascend4.org</a>. Following the steps for setting up <em>MSYS</em>, <em>Switchable 32- and 64-bit modes</em> and <em>MinGW-w64</em> you will get a GCC (<em>TDM-GCC MinGW-w64</em>) for Windows including a command window. It also includes <a href="http://openmp.org/wp/">OpenMP</a> for parallel computing.</p>
+<h2 id="getting-started-setting-up-the-vinecopulamatlab-toolbox_1">Getting started / Setting up the VineCopulaMatlab toolbox</h2>
+<ol>
+<li>Download the <code>mex_C++_mingw-w64.xml</code> file from <a href="https://github.com/chappjc/MATLAB/tree/master/MinGW">Chappjc's GitHub folder MATLAB</a>. Open the file and add <code>-fopenmp -lgfortran -lgomp -lnlopt -lVineCopulaCPP</code> at the end of line 67 (definition of the variable <code>LINKLIBS</code>) directly after <code>-lmex -lmx -leng -lmat -lmwlapack -lmwblas</code>. Save the file <code>mex_C++_mingw-w64.xml</code> in the <code>private</code> folder of the VineCopulaMatlab toolbox.</li>
+<li>The C++ libraries boost (cf. http://www.boost.org/) don't need to be build. Just add the include directory when building the toolbox.</li>
+<li>
+<p>The <a href="http://ab-initio.mit.edu/wiki/index.php/NLopt">nonlinear optimization library NLopt</a>. If you have set up MingGW-w64 you can just follow the installation guidance, i.e.,</p>
+<pre class="prettyprint well"><code>./configure --prefix=Installation_Dir
+make
+make install
+</code></pre>
+</li>
+<li>
+<p>Build the VineCopulaMatlab toolbox using the make command. You may have to set the boostincludedir option. If the boost libraries files are in the folder <code>C:\BoostDir</code>, then you may set boostincludedir to /c/BoostDir.</p>
+<p><code>$ make boostincludedir=/c/BoostDir</code></p>
+</li>
+<li>
+<p>Install the VineCopulaMatlab toolbox using the make command. Depending on the installation directory (set as prefix) you may need to run msys as admin. You may have to set the prefix and boostincludedir options. If you set prefix to <code>/c/Dir</code> the library files will be placed in <code>C:\Dir\lib</code> and the include files will be placed in <code>C:\Dir\include</code>. Additionally you may want to specify the variables <code>mingwroot</code> (default value = "C:\MinGW\64") and <code>mingw_mex_xml</code> (default value = "mex_C++_mingw-w64.xml"), which specify where you have installed MinGW-w64 and how your mex setup file is called.</p>
+<p><code>$ make install prefix=/c/Dir boostincludedir=/c/BoostDir</code></p>
 </li>
 </ol>
 <h2 id="remarks">Remarks</h2>
 <ul>
-<li>Especially if you are not working with an UNIX operating system you may
-    get errors when compiling the C++ files during the execution of the
-    installVineCPP function. You may have to add the path of the installation
-    of the boost libraries by changing line 63 of the installVineCPP function
-    from eval(['mex ' CPP_files{i}]) to eval(['mex -I''pathname'' ' CPP_files{i}]) , where pathname is replaced by the path of the boost libraries.</li>
 <li>For some C++ compilers the function expm1 is not available. A
     possible workaround is to use the expm1 from the boost libraries.
-    Therefore, add the line #include <boost/math/special_functions/expm1.hpp> 
-    to the header file VineCPP_header.hpp. Then substitute expm1 by boost::math::expm1.</li>
+    Therefore, add the line #include &lt;boost/math/special_functions/expm1.hpp> 
+    to the header file VineCopulaCPP_header.hpp. Then substitute expm1 by boost::math::expm1.</li>
 <li>The function lgamma is also not available in some C++ compilers. A
     possible workaround is to use the lgamma function from the boost libraries.
-    Therefore, add the line #include <boost/math/special_functions/gamma.hpp> 
-    to the header file VineCPP_header.hpp. Then substitute lgamma
+    Therefore, add the line #include &lt;boost/math/special_functions/gamma.hpp> 
+    to the header file VineCopulaCPP_header.hpp. Then substitute lgamma
     by boost::math::lgamma.</li>
 </ul>
 <hr />
