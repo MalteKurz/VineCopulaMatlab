@@ -77,15 +77,15 @@ if not(isnumeric(family))
 end
 
 if family == 0
-    C = @(U) PCCDF(0,U(:,1),U(:,2));
+    C = @(U) VineCopulaMatlab(2,0,U(:,1),U(:,2));
 elseif nargin == 5 && not(isempty(varargin{2}))
     if not(isnumeric(varargin{2}))
         Rotations = {'r90','r180','r270'};
         varargin{2} = find(strcmp(varargin{2},Rotations)).*90;
     end
-    C = @(U) PCCDF(family,U(:,1),U(:,2),varargin{1},varargin{2});
+    C = @(U) VineCopulaMatlab(2,family,U(:,1),U(:,2),varargin{1},varargin{2});
 else
-    C = @(U) PCCDF(family,U(:,1),U(:,2),varargin{1});
+    C = @(U) VineCopulaMatlab(2,family,U(:,1),U(:,2),varargin{1});
 end
 
 dim = length(a);

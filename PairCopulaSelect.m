@@ -108,6 +108,6 @@ if not(iscell(familyset))
     end
 end
 
-[family,ParamHat,rotation] = PCSelect(u1,u2,families);
+[family,ParamHat,rotation] = VineCopulaMatlab(11,u1,u2,families);
 
 end

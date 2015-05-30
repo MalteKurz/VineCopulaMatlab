@@ -63,15 +63,15 @@ end
 U = zeros(N,2);
 
 if family == 0
-    [U(:,1),U(:,2)] = PCRand(0,N);
+    [U(:,1),U(:,2)] = VineCopulaMatlab(10,0,N);
 elseif nargin == 4 && not(isempty(varargin{2}))
     if not(isnumeric(varargin{2}))
         Rotations = {'r90','r180','r270'};
         varargin{2} = find(strcmp(varargin{2},Rotations)).*90;
     end
-    [U(:,1),U(:,2)] = PCRand(family,N,varargin{1},varargin{2});
+    [U(:,1),U(:,2)] = VineCopulaMatlab(10,family,N,varargin{1},varargin{2});
 else
-    [U(:,1),U(:,2)]= PCRand(family,N,varargin{1});
+    [U(:,1),U(:,2)]= VineCopulaMatlab(10,family,N,varargin{1});
 end
 
 end

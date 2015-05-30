@@ -75,15 +75,15 @@ if not(isnumeric(family))
 end
 
 if family == 0
-    U=PCHfun(0,u1,u2,0);
+    U=VineCopulaMatlab(4,0,u1,u2,0);
 elseif nargin == 5 && not(isempty(varargin{2}))
     if not(isnumeric(varargin{2}))
         Rotations = {'r90','r180','r270'};
         varargin{2} = find(strcmp(varargin{2},Rotations)).*90;
     end
-    U=PCHfun(family,u1,u2,varargin{1},varargin{2});
+    U=VineCopulaMatlab(4,family,u1,u2,varargin{1},varargin{2});
 else
-    U=PCHfun(family,u1,u2,varargin{1});
+    U=VineCopulaMatlab(4,family,u1,u2,varargin{1});
 end
 
 end

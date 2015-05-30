@@ -31,6 +31,6 @@ function [pValue,TestStat] = PairCopulaIndepTest(u1,u2)
 % Check the (Copula-)data input.
 CheckData([u1,u2])
 
-[pValue,TestStat] = PCIndepTest(u1,u2);
+[pValue,TestStat] = VineCopulaMatlab(5,u1,u2);
 
 end

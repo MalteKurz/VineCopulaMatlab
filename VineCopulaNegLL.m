@@ -155,6 +155,6 @@ elseif length(thetas) ~= NumbPCs+ sum(families(1:NumbPCs)==3) + sum(families(1:N
     error('Wrong number of copula parameters')
 end
 
-CLL = VineNegLL(type,u,families,thetas,rotation,CutOffTree);
+CLL = VineCopulaMatlab(104,type,u,families,thetas,rotation,CutOffTree);
 
 end

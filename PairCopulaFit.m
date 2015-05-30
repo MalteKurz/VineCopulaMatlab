@@ -66,9 +66,9 @@ if nargin == 4 && not(isempty(varargin{1}))
         Rotations = {'r90','r180','r270'};
         varargin{1} = find(strcmp(varargin{1},Rotations)).*90;
     end
-    ParamHat = PCFit(family,u1,u2,varargin{1});
+    ParamHat = VineCopulaMatlab(3,family,u1,u2,varargin{1});
 else
-    ParamHat = PCFit(family,u1,u2);
+    ParamHat = VineCopulaMatlab(3,family,u1,u2);
 end
 
 end

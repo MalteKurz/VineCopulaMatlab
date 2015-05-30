@@ -76,9 +76,9 @@ if nargin == 4 && not(isempty(varargin{1}))
         Rotations = {'r90','r180','r270'};
         varargin{1} = find(strcmp(varargin{1},Rotations)).*90;
     end
-    [AIC,ParamHat] = PCAIC(family,u1,u2,varargin{1});
+    [AIC,ParamHat] = VineCopulaMatlab(1,family,u1,u2,varargin{1});
 else
-    [AIC,ParamHat] = PCAIC(family,u1,u2);
+    [AIC,ParamHat] = VineCopulaMatlab(1,family,u1,u2);
 end
         
 end
