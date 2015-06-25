@@ -6,16 +6,17 @@
 void PCAIC(int nlhs, mxArray *plhs[], int nrhs, const mxArray *prhs[])
 {
 //declare variables
-    double *U, *V, *theta, *AIC, *Rotation;
+    double *U, *V, *theta, *AIC, *Rotation, *bounds;
     double *Family;
     int family, rotation;
     unsigned int n;
     
 //figure out dimensions
-    n = (unsigned int)mxGetM(prhs[2]);
+    n = (unsigned int)mxGetM(prhs[3]);
     
 //associate inputs    
-    Family = mxGetPr(prhs[1]);
+    bounds = mxGetPr(prhs[1]);
+    Family = mxGetPr(prhs[2]);
     family = (int) *Family;
     
 // Depending on the family associate outputs
@@ -42,24 +43,24 @@ void PCAIC(int nlhs, mxArray *plhs[], int nrhs, const mxArray *prhs[])
     AIC = mxGetPr(plhs[0]);
     theta = mxGetPr(plhs[1]);
     
-    if (nrhs==6 && !mxIsEmpty(prhs[4]))
+    if (nrhs==6 && !mxIsEmpty(prhs[5]))
     {
         mxArray *U_in, *V_in;
-        U_in = mxDuplicateArray(prhs[2]);
-        V_in = mxDuplicateArray(prhs[3]);
+        U_in = mxDuplicateArray(prhs[3]);
+        V_in = mxDuplicateArray(prhs[4]);
         U = mxGetPr(U_in);
         V = mxGetPr(V_in);
-        Rotation = mxGetPr(prhs[4]);
+        Rotation = mxGetPr(prhs[5]);
         rotation = (int) *Rotation;
         
-        PairCopulaAIC(AIC,theta,family,rotation,U,V,n);
+        PairCopulaAIC(bounds,AIC,theta,family,rotation,U,V,n);
     }
     else
     {
-        U = mxGetPr(prhs[2]);
-        V = mxGetPr(prhs[3]);
+        U = mxGetPr(prhs[3]);
+        V = mxGetPr(prhs[4]);
         
-        PairCopulaAIC(AIC,theta,family,U,V,n);
+        PairCopulaAIC(bounds,AIC,theta,family,U,V,n);
     }
 
     
@@ -67,6 +68,7 @@ void PCAIC(int nlhs, mxArray *plhs[], int nrhs, const mxArray *prhs[])
     return;
     
 }
+
 
 // FunctionID 2: PCCDF
 void PCCDF(int nlhs, mxArray *plhs[], int nrhs, const mxArray *prhs[])
@@ -119,16 +121,17 @@ void PCCDF(int nlhs, mxArray *plhs[], int nrhs, const mxArray *prhs[])
 void PCFit(int nlhs, mxArray *plhs[], int nrhs, const mxArray *prhs[])
 {
 //declare variables
-    double *U, *V, *theta, *Rotation;
+    double *U, *V, *theta, *Rotation, *bounds;
     double *Family;
     int family, rotation;
     unsigned int n;
     
 //figure out dimensions
-    n = (unsigned int)mxGetM(prhs[2]);
+    n = (unsigned int)mxGetM(prhs[3]);
     
 //associate inputs
-    Family = mxGetPr(prhs[1]);
+    bounds = mxGetPr(prhs[1]);
+    Family = mxGetPr(prhs[2]);
     family = (int) *Family;
     
 // Depending on the family associate outputs and upper and lower bounds
@@ -152,24 +155,24 @@ void PCFit(int nlhs, mxArray *plhs[], int nrhs, const mxArray *prhs[])
 //associate outputs
     theta = mxGetPr(plhs[0]);
     
-    if (nrhs==5 && !mxIsEmpty(prhs[4]))
+    if (nrhs==6 && !mxIsEmpty(prhs[5]))
     {
         mxArray *U_in, *V_in;
-        U_in = mxDuplicateArray(prhs[2]);
-        V_in = mxDuplicateArray(prhs[3]);
+        U_in = mxDuplicateArray(prhs[3]);
+        V_in = mxDuplicateArray(prhs[4]);
         U = mxGetPr(U_in);
         V = mxGetPr(V_in);
-        Rotation = mxGetPr(prhs[4]);
+        Rotation = mxGetPr(prhs[5]);
         rotation = (int) *Rotation;
         
-        PairCopulaFit(theta,family,rotation,U,V,n);
+        PairCopulaFit(bounds,theta,family,rotation,U,V,n);
     }
     else
     {
-        U = mxGetPr(prhs[2]);
-        V = mxGetPr(prhs[3]);
+        U = mxGetPr(prhs[3]);
+        V = mxGetPr(prhs[4]);
         
-        PairCopulaFit(theta,family,U,V,n);
+        PairCopulaFit(bounds,theta,family,U,V,n);
     }
     
     
@@ -511,28 +514,47 @@ void PCRand(int nlhs, mxArray *plhs[], int nrhs, const mxArray *prhs[])
     
     
 //associate inputs
-    Family = mxGetPr(prhs[1]);
+    Family = mxGetPr(prhs[2]);
     family = (int) *Family;
-    N = mxGetPr(prhs[2]);
+    N = mxGetPr(prhs[3]);
     n = (unsigned int) *N;
-    theta = mxGetPr(prhs[3]);
+    theta = mxGetPr(prhs[4]);
+    
+    
+// Load the state of the seed
+    double *OldState, *StateExport;
+    int i;
+    OldState = mxGetPr(prhs[1]);
+    
+    std::vector<unsigned int> StateImport(624);
+    for (i=0;i<624;i++)
+    {
+        StateImport[i] = (unsigned int) OldState[i];
+    }
     
 //associate outputs
-    plhs[0] = mxCreateDoubleMatrix(n,1,mxREAL);
     plhs[1] = mxCreateDoubleMatrix(n,1,mxREAL);
-    U = mxGetPr(plhs[0]);
-    V = mxGetPr(plhs[1]);
+    plhs[2] = mxCreateDoubleMatrix(n,1,mxREAL);
+    U = mxGetPr(plhs[1]);
+    V = mxGetPr(plhs[2]);
     
-    if (nrhs==5 && !mxIsEmpty(prhs[4]))
+    if (nrhs==6 && !mxIsEmpty(prhs[5]))
     {
-        Rotation = mxGetPr(prhs[4]);
+        Rotation = mxGetPr(prhs[5]);
         rotation = (int) *Rotation;
         
-        PairCopulaRand(family,rotation,theta,U,V,n);
+        PairCopulaRand(StateImport,family,rotation,theta,U,V,n);
     }
     else
     {
-        PairCopulaRand(family,theta,U,V,n);
+        PairCopulaRand(StateImport,family,theta,U,V,n);
+    }
+    
+    plhs[0] = mxCreateDoubleMatrix(624, 1, mxREAL);
+    StateExport = mxGetPr(plhs[0]);
+    for (i=0;i<624;i++)
+    {
+        StateExport[i] = (double) StateImport[i];
     }
     
     
@@ -544,29 +566,30 @@ void PCRand(int nlhs, mxArray *plhs[], int nrhs, const mxArray *prhs[])
 void PCSelect(int nlhs, mxArray *plhs[], int nrhs, const mxArray *prhs[])
 {
 //declare variables
-    double *U, *V, *Theta, *Rotation, *Family,*familyset;
+    double *U, *V, *Theta, *Rotation, *Family,*familyset, *bounds;
     int family, rotation;
     unsigned int n;
     int m;
     std::vector<double> theta(3);
     
 //figure out dimensions
-    n = (unsigned int)mxGetM(prhs[1]);
-    m = (int)mxGetM(prhs[3]);
+    n = (unsigned int)mxGetM(prhs[2]);
+    m = (int)mxGetM(prhs[4]);
     
 //associate outputs
     plhs[0] = mxCreateDoubleScalar(mxREAL);
     Family = mxGetPr(plhs[0]);
     
 //associate inputs
+    bounds = mxGetPr(prhs[1]);
     mxArray *U_in, *V_in;
-    U_in = mxDuplicateArray(prhs[1]);
-    V_in = mxDuplicateArray(prhs[2]);
+    U_in = mxDuplicateArray(prhs[2]);
+    V_in = mxDuplicateArray(prhs[3]);
     U = mxGetPr(U_in);
     V = mxGetPr(V_in);
-    familyset = mxGetPr(prhs[3]);
+    familyset = mxGetPr(prhs[4]);
     
-    PairCopulaSelect(&family,&theta[0],&rotation,U,V,n,familyset,m);
+    PairCopulaSelect(bounds,&family,&theta[0],&rotation,U,V,n,familyset,m);
     
     *Family = (double) family;
 // Depending on the family associate outputs and upper and lower bounds
@@ -686,20 +709,21 @@ void PCVfun(int nlhs, mxArray *plhs[], int nrhs, const mxArray *prhs[])
 void VineFit(int nlhs, mxArray *plhs[], int nrhs, const mxArray *prhs[])
 {
 //declare variables
-    double *U, *families, *thetas, *thetas0, *rotation, *CLL;
+    double *U, *families, *thetas, *thetas0, *rotation, *CLL, *bounds;
     double *Type;
     int type, J=0;
     unsigned int i, n, d;
     
 //figure out dimensions
-    n = (unsigned int)mxGetM(prhs[2]);
-    d = (unsigned int)mxGetN(prhs[2]);
+    n = (unsigned int)mxGetM(prhs[3]);
+    d = (unsigned int)mxGetN(prhs[3]);
     
 //associate inputs
-    Type = mxGetPr(prhs[1]);
+    bounds = mxGetPr(prhs[1]);
+    Type = mxGetPr(prhs[2]);
     type = (int) *Type;
-    families = mxGetPr(prhs[3]);
-    U = mxGetPr(prhs[2]);
+    families = mxGetPr(prhs[4]);
+    U = mxGetPr(prhs[3]);
     
     for (i=0;i<(d-1)*d/2;i++)
     {
@@ -734,19 +758,19 @@ void VineFit(int nlhs, mxArray *plhs[], int nrhs, const mxArray *prhs[])
     plhs[2] = mxCreateDoubleMatrix(1,J,mxREAL);
     thetas0 = mxGetPr(plhs[2]);
     
-    if (nrhs==5 && !mxIsEmpty(prhs[4]))
+    if (nrhs==6 && !mxIsEmpty(prhs[5]))
     {
-        rotation = mxGetPr(prhs[4]);
+        rotation = mxGetPr(prhs[5]);
         
         VineCopula Vine = VineCopula(type,d,families,rotation,thetas);
         VineCopula* VinePtr = &Vine;
-        VineCopulaFit(VinePtr, CLL, thetas0, U, n);
+        VineCopulaFit(bounds, VinePtr, CLL, thetas0, U, n);
     }
     else
     {
         VineCopula Vine = VineCopula(type,d,families,thetas);
         VineCopula* VinePtr = &Vine;
-        VineCopulaFit(VinePtr, CLL, thetas0, U, n);
+        VineCopulaFit(bounds, VinePtr, CLL, thetas0, U, n);
     }
 
 
@@ -760,21 +784,22 @@ void VineFit(int nlhs, mxArray *plhs[], int nrhs, const mxArray *prhs[])
 void VineFitSeq(int nlhs, mxArray *plhs[], int nrhs, const mxArray *prhs[])
 {
 //declare variables
-    double *U, *families, *thetas, *rotation, *CLL;
+    double *U, *families, *thetas, *rotation, *CLL, *bounds;
     double *Type;
     int type, J=0;
     unsigned int i, n, d;
     
 
 //figure out dimensions
-    n = (unsigned int)mxGetM(prhs[2]);
-    d = (unsigned int)mxGetN(prhs[2]);
+    n = (unsigned int)mxGetM(prhs[3]);
+    d = (unsigned int)mxGetN(prhs[3]);
     
 //associate inputs
-    Type = mxGetPr(prhs[1]);
+    bounds = mxGetPr(prhs[1]);
+    Type = mxGetPr(prhs[2]);
     type = (int) *Type;
-    families = mxGetPr(prhs[3]);
-    U = mxGetPr(prhs[2]);
+    families = mxGetPr(prhs[4]);
+    U = mxGetPr(prhs[3]);
     
     for (i=0;i<(d-1)*d/2;i++)
     {
@@ -807,19 +832,19 @@ void VineFitSeq(int nlhs, mxArray *plhs[], int nrhs, const mxArray *prhs[])
     plhs[1] = mxCreateDoubleScalar(mxREAL);
     CLL = mxGetPr(plhs[1]);
     
-    if (nrhs==5 && !mxIsEmpty(prhs[4]))
+    if (nrhs==6 && !mxIsEmpty(prhs[5]))
     {
-        rotation = mxGetPr(prhs[4]);
+        rotation = mxGetPr(prhs[5]);
         
         VineCopula Vine = VineCopula(type,d,families,rotation,thetas);
         VineCopula* VinePtr = &Vine;
-        VineCopulaFitSeq(VinePtr, CLL, U, n);
+        VineCopulaFitSeq(bounds,VinePtr, CLL, U, n);
     }
     else
     {
         VineCopula Vine = VineCopula(type,d,families,thetas);
         VineCopula* VinePtr = &Vine;
-        VineCopulaFitSeq(VinePtr, CLL, U, n);
+        VineCopulaFitSeq(bounds,VinePtr, CLL, U, n);
     }
 
 
@@ -991,36 +1016,53 @@ void VineRand(int nlhs, mxArray *plhs[], int nrhs, const mxArray *prhs[])
     unsigned int n, d;
     
 //associate inputs
-    Type = mxGetPr(prhs[1]);
+    Type = mxGetPr(prhs[2]);
     type = (int) *Type;
-    N = mxGetPr(prhs[2]);
+    N = mxGetPr(prhs[3]);
     n = (unsigned int) *N;
-    D = mxGetPr(prhs[3]);
+    D = mxGetPr(prhs[4]);
     d = (unsigned int) *D;
-    families = mxGetPr(prhs[4]);
-    thetas = mxGetPr(prhs[5]);
+    families = mxGetPr(prhs[5]);
+    thetas = mxGetPr(prhs[6]);
+    
+    
+// Load the state of the seed
+    double *OldState, *StateExport;
+    int i;
+    OldState = mxGetPr(prhs[1]);
+    
+    std::vector<unsigned int> StateImport(624);
+    for (i=0;i<624;i++)
+    {
+        StateImport[i] = (unsigned int) OldState[i];
+    }
     
 //associate outputs
-    plhs[0] = mxCreateDoubleMatrix(n,d,mxREAL);
-    U = mxGetPr(plhs[0]);
+    plhs[1] = mxCreateDoubleMatrix(n,d,mxREAL);
+    U = mxGetPr(plhs[1]);
     
-    if (nrhs==7 && !mxIsEmpty(prhs[6]))
+    if (nrhs==8 && !mxIsEmpty(prhs[7]))
     {
-        rotation = mxGetPr(prhs[6]);
-        
+        rotation = mxGetPr(prhs[7]);
+         
         VineCopula Vine = VineCopula(type,d,families,rotation,thetas);
         VineCopula* VinePtr = &Vine;
-        VineCopulaRand(VinePtr,U,n);
+        VineCopulaRand(StateImport,VinePtr,U,n);
     }
     else
     {
         VineCopula Vine = VineCopula(type,d,families,thetas);
         VineCopula* VinePtr = &Vine;
-        VineCopulaRand(VinePtr,U,n);
+        VineCopulaRand(StateImport,VinePtr,U,n);
     }
-
-
-
+    
+    plhs[0] = mxCreateDoubleMatrix(624, 1, mxREAL);
+    StateExport = mxGetPr(plhs[0]);
+    for (i=0;i<624;i++)
+    {
+        StateExport[i] = (double) StateImport[i];
+    }
+    
     
     return;
     
@@ -1030,7 +1072,7 @@ void VineRand(int nlhs, mxArray *plhs[], int nrhs, const mxArray *prhs[])
 void VineStructureSelect(int nlhs, mxArray *plhs[], int nrhs, const mxArray *prhs[])
 {
 //declare variables
-    double *U, *familyset, *families, *rotations, *Thetas, *structure, *structuringrule;
+    double *U, *familyset, *families, *rotations, *Thetas, *structure, *structuringrule, *bounds;
     double *Type;
     int type, m, StructuringRule;
     unsigned int n;
@@ -1038,17 +1080,18 @@ void VineStructureSelect(int nlhs, mxArray *plhs[], int nrhs, const mxArray *prh
     
 
 //figure out dimensions
-    n = (unsigned int)mxGetM(prhs[2]);
-    d = (int)mxGetN(prhs[2]);
+    n = (unsigned int)mxGetM(prhs[3]);
+    d = (int)mxGetN(prhs[3]);
     
 //associate inputs
-    Type = mxGetPr(prhs[1]);
+    bounds = mxGetPr(prhs[1]);
+    Type = mxGetPr(prhs[2]);
     type = (int) *Type;
-    U = mxGetPr(prhs[2]);
-    structuringrule = mxGetPr(prhs[3]);
+    U = mxGetPr(prhs[3]);
+    structuringrule = mxGetPr(prhs[4]);
     StructuringRule = (int) *structuringrule;
-    m = (int)mxGetM(prhs[4]);
-    familyset = mxGetPr(prhs[4]);
+    m = (int)mxGetM(prhs[5]);
+    familyset = mxGetPr(prhs[5]);
     
     std::vector<double> thetas;
     
@@ -1060,7 +1103,7 @@ void VineStructureSelect(int nlhs, mxArray *plhs[], int nrhs, const mxArray *prh
     plhs[2] = mxCreateDoubleMatrix(1,d*(d-1)/2,mxREAL);
     rotations = mxGetPr(plhs[2]);
     
-    VineCopulaStructureSelect(type, structure, families, rotations, thetas, U, d, n, StructuringRule, familyset, m);
+    VineCopulaStructureSelect(bounds,type, structure, families, rotations, thetas, U, d, n, StructuringRule, familyset, m);
     
     int NumbParams = thetas.size();
     plhs[3] = mxCreateDoubleMatrix(1,NumbParams,mxREAL);
@@ -1081,6 +1124,7 @@ void CvMTestStatCPP(int nlhs, mxArray *plhs[], int nrhs, const mxArray *prhs[])
  * This is the case, where only the value of the test statistic should be
  * given back to MATLAB.
  */
+
 //declare variables
         const mwSize *dims1, *dims2;
         double *U, *V, *TestStat, *V1, *V2, *V1dot, *V2dot, *V1dotdot, *V2dotdot;
@@ -1330,25 +1374,33 @@ void RandNormal(int nlhs, mxArray *plhs[], int nrhs, const mxArray *prhs[])
 {
 //declare variables
     double *U;
-    double *N, *M;
+    double *N, *M, *OldState, *StateExport;
     unsigned int i, n, m;
+        
+// Load the state of the seed
+    boost::mt19937 gen;
+    OldState = mxGetPr(prhs[1]);
     
+    std::vector<unsigned int> StateImport(624);
+    for (i=0;i<624;i++)
+    {
+        StateImport[i] = (unsigned int) OldState[i];
+    }
+    
+    std::stringstream RNG_State_In;
+    std::copy(StateImport.begin(), StateImport.end(), std::ostream_iterator<unsigned int>(RNG_State_In, " "));
+    RNG_State_In>>gen;
 
 //figure out dimensions
-    N = mxGetPr(prhs[1]);
+    N = mxGetPr(prhs[2]);
     n = (unsigned int) *N;
-    M = mxGetPr(prhs[2]);
+    M = mxGetPr(prhs[3]);
     m = (unsigned int) *M;
     
 //associate outputs
-    plhs[0] = mxCreateDoubleMatrix(n,m,mxREAL);
-    U = mxGetPr(plhs[0]);
+    plhs[1] = mxCreateDoubleMatrix(n,m,mxREAL);
+    U = mxGetPr(plhs[1]);
     
-    boost::mt19937 gen;
-    // Load the state
-    std::ifstream fi(PathSeed);
-    fi>>gen;
-    fi.close();
     
     boost::normal_distribution <> NRAND;
     
@@ -1360,10 +1412,17 @@ void RandNormal(int nlhs, mxArray *plhs[], int nrhs, const mxArray *prhs[])
     }
     
     // Save the state
-    std::ofstream fo(PathSeed,
-            std::ios_base::out);
-    fo<<gen;
-    fo.close();
+    double state;
+    plhs[0] = mxCreateDoubleMatrix(624, 1, mxREAL);
+    StateExport = mxGetPr(plhs[0]);
+    std::stringstream RNG_State_Out;
+    
+    RNG_State_Out << gen;
+    for (i=0;i<624;i++)
+    {
+        RNG_State_Out >> state;
+        StateExport[i] = (double) state;
+    }
     
     
     
@@ -1376,25 +1435,34 @@ void RandUniform(int nlhs, mxArray *plhs[], int nrhs, const mxArray *prhs[])
 {
 //declare variables
     double *U;
-    double *N, *M;
-    unsigned int i, n, m;
+    double *N, *M, *OldState, *StateExport;
+    unsigned int n, m;
+    int i;
     
-
+// Load the state of the seed
+    boost::mt19937 gen;
+    OldState = mxGetPr(prhs[1]);
+    
+    std::vector<unsigned int> StateImport(624);
+    for (i=0;i<624;i++)
+    {
+        StateImport[i] = (unsigned int) OldState[i];
+    }
+    
+    std::stringstream RNG_State_In;
+    std::copy(StateImport.begin(), StateImport.end(), std::ostream_iterator<unsigned int>(RNG_State_In, " "));
+    RNG_State_In>>gen;
+    
 //figure out dimensions
-    N = mxGetPr(prhs[1]);
+    N = mxGetPr(prhs[2]);
     n = (unsigned int) *N;
-    M = mxGetPr(prhs[2]);
+    M = mxGetPr(prhs[3]);
     m = (unsigned int) *M;
     
 //associate outputs
-    plhs[0] = mxCreateDoubleMatrix(n,m,mxREAL);
-    U = mxGetPr(plhs[0]);
+    plhs[1] = mxCreateDoubleMatrix(n,m,mxREAL);
+    U = mxGetPr(plhs[1]);
     
-    boost::mt19937 gen;
-    // Load the state
-    std::ifstream fi(PathSeed);
-    fi>>gen;
-    fi.close();
     
     boost::uniform_01 <> URAND;
     
@@ -1406,31 +1474,64 @@ void RandUniform(int nlhs, mxArray *plhs[], int nrhs, const mxArray *prhs[])
     }
     
     // Save the state
-    std::ofstream fo(PathSeed,
-            std::ios_base::out);
-    fo<<gen;
-    fo.close();
+    double state;
+    plhs[0] = mxCreateDoubleMatrix(624, 1, mxREAL);
+    StateExport = mxGetPr(plhs[0]);
+    std::stringstream RNG_State_Out;
+    
+    RNG_State_Out << gen;
+    for (i=0;i<624;i++)
+    {
+        RNG_State_Out >> state;
+        StateExport[i] = (double) state;
+    }
     
     return;
     
 }
 
-// FunctionID 1005: SetSeed
-void SetSeed(int nlhs, mxArray *plhs[], int nrhs, const mxArray *prhs[])
+// FunctionID 1005: VineCopulaMatlabSetSeed
+void VineCopulaMatlabSetSeed(int nlhs, mxArray *plhs[], int nrhs, const mxArray *prhs[])
 {
-  boost::mt19937 gen;
-  gen.seed(time(0));
-  
-  // Save the state
-  std::ofstream fo(PathSeed, 
-		   std::ios_base::out);
-  fo<<gen;
-  fo.close();
-  
+    boost::mt19937 gen;
+    
+    // Switch depending on the number of inputs
+    if (nrhs==2 && !mxIsEmpty(prhs[1]))
+    {    double *SeedInput;
+         int IntSeed;
+         
+         SeedInput = mxGetPr(prhs[1]);
+         IntSeed = (int) SeedInput[0];
+         
+         gen.seed(IntSeed);
+    }
+    else
+    {
+        gen.seed(time(0));
+    }
+    
+//declare variables
+    double *StateExport;
+    unsigned int i;
+    
+//associate outputs
+    std::stringstream RNG_State_Out;
+    RNG_State_Out << gen;
+    
+    plhs[0] = mxCreateDoubleMatrix(624, 1, mxREAL);
+    StateExport = mxGetPr(plhs[0]);
+    
+    double state;
+    
+    for (i=0;i<624;i++)
+    {
+        RNG_State_Out >> state;
+        StateExport[i] = state;
+    }
+
   return;
   
 }
-
 
 
 
@@ -1443,7 +1544,7 @@ void mexFunction(int nlhs, mxArray *plhs[], int nrhs, const mxArray *prhs[])
     FunctionID = mxGetPr(prhs[0]);
     functionID = (int) *FunctionID;
     
-// Depending on the family associate outputs
+// Depending on the functionID call the corresponding function
     switch(functionID){
         case 1: // PCAIC
         {
@@ -1555,9 +1656,9 @@ void mexFunction(int nlhs, mxArray *plhs[], int nrhs, const mxArray *prhs[])
             RandUniform(nlhs, plhs, nrhs, prhs);
             break;
         }
-        case 1005: // SetSeed
+        case 1005: // VineCopulaMatlabSetSeed
         {
-            SetSeed(nlhs, plhs, nrhs, prhs);
+            VineCopulaMatlabSetSeed(nlhs, plhs, nrhs, prhs);
             break;
         }
         default:
@@ -1569,6 +1670,5 @@ void mexFunction(int nlhs, mxArray *plhs[], int nrhs, const mxArray *prhs[])
     return;
     
 }
-
 
 

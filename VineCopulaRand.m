@@ -156,7 +156,9 @@ CheckParameters(families,thetas)
         rotation = zeros(1,d*(d-1)/2);
     end
     % The simplified case is completely simulated in C++
-    U=VineCopulaMatlab(105,type,N,d,families,thetas,rotation);
+    SeedState = VineCopulaMatlabSeedState;
+    [SeedState,U] = VineCopulaMatlab(105,SeedState,type,N,d,families,thetas,rotation);
+    VineCopulaMatlabSeedState(SeedState);
 else
     condparameterfunctionals = varargin{2};
     if nargin == 8 && not(isempty(varargin{3}))
@@ -310,7 +312,9 @@ else
             % obtained by applying the iterative inversion algorithm for
             % generating pseudo-random variables.
             k = 2;
-            W = RandUniform(N,d);
+            SeedState = VineCopulaMatlabSeedState;
+            [SeedState,W] = VineCopulaMatlab(1004,SeedState,N,d);
+            VineCopulaMatlabSeedState(SeedState);
             U(:,1) = W(:,1);
             U(:,2) = InvvFunctionals{1}(W(:,1),W(:,2));
             for i = 3:d
@@ -483,7 +487,9 @@ else
             % generating pseudo-random variables.
             v = 1;
             h = 1;
-            W = RandUniform(N,d);
+            SeedState = VineCopulaMatlabSeedState;
+            [SeedState,W] = VineCopulaMatlab(1004,SeedState,N,d);
+            VineCopulaMatlabSeedState(SeedState);
             A = zeros(N,d,d);
             B = zeros(N,d,d);
             U(:,1) = W(:,1);

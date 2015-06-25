@@ -58,7 +58,9 @@ if not(isnumeric(family))
         error(['The copula family ' family ' is not implemented'])
     end
 end
-        
+
+% Obtain parameter bounds
+bounds = GlobalPairCopulaParameterBounds';        
 
 % Checking for rotated copulas
 if nargin == 4 && not(isempty(varargin{1}))
@@ -66,9 +68,9 @@ if nargin == 4 && not(isempty(varargin{1}))
         Rotations = {'r90','r180','r270'};
         varargin{1} = find(strcmp(varargin{1},Rotations)).*90;
     end
-    ParamHat = VineCopulaMatlab(3,family,u1,u2,varargin{1});
+    ParamHat = VineCopulaMatlab(3,bounds,family,u1,u2,varargin{1});
 else
-    ParamHat = VineCopulaMatlab(3,family,u1,u2);
+    ParamHat = VineCopulaMatlab(3,bounds,family,u1,u2);
 end
 
 end

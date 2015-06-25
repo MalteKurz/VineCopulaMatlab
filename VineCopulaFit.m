@@ -187,10 +187,13 @@ if not(isnumeric(varargin{1}))
     varargin{1} = cell2mat(varargin{1});
 end
 
+% Obtain parameter bounds
+bounds = GlobalPairCopulaParameterBounds';   
+
 if strcmp(EstMethod,'joint')
-    [ParamHat,MaxLogLikes,theta0] = VineCopulaMatlab(101,type,u,families,varargin{1});
+    [ParamHat,MaxLogLikes,theta0] = VineCopulaMatlab(101,bounds,type,u,families,varargin{1});
 else
-    [theta0,MaxLogLikes] = VineCopulaMatlab(102,type,u,families,varargin{1});
+    [theta0,MaxLogLikes] = VineCopulaMatlab(102,bounds,type,u,families,varargin{1});
     ParamHat = theta0;
 end
 

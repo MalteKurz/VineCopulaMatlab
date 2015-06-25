@@ -37,10 +37,7 @@ function [lb,ub] = PairCopulaParameterBounds(families)
 %
 % Author: Malte Kurz
 
-Path = mfilename('fullpath');
-Path = Path(1:end-length(mfilename)-1);
-
-bounds = dlmread([Path '/src/bounds.txt']);
+bounds = GlobalPairCopulaParameterBounds;
 
 if ischar(families)
     families = {families};

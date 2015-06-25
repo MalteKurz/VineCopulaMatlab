@@ -63,15 +63,21 @@ end
 U = zeros(N,2);
 
 if family == 0
-    [U(:,1),U(:,2)] = VineCopulaMatlab(10,0,N);
+    SeedState = VineCopulaMatlabSeedState;
+    [SeedState,U(:,1),U(:,2)] = VineCopulaMatlab(10,SeedState,0,N);
+    VineCopulaMatlabSeedState(SeedState);
 elseif nargin == 4 && not(isempty(varargin{2}))
     if not(isnumeric(varargin{2}))
         Rotations = {'r90','r180','r270'};
         varargin{2} = find(strcmp(varargin{2},Rotations)).*90;
     end
-    [U(:,1),U(:,2)] = VineCopulaMatlab(10,family,N,varargin{1},varargin{2});
+    SeedState = VineCopulaMatlabSeedState;
+    [SeedState,U(:,1),U(:,2)] = VineCopulaMatlab(10,SeedState,family,N,varargin{1},varargin{2});
+    VineCopulaMatlabSeedState(SeedState);
 else
-    [U(:,1),U(:,2)]= VineCopulaMatlab(10,family,N,varargin{1});
+    SeedState = VineCopulaMatlabSeedState;
+    [SeedState,U(:,1),U(:,2)] = VineCopulaMatlab(10,SeedState,family,N,varargin{1});
+    VineCopulaMatlabSeedState(SeedState);
 end
 
 end

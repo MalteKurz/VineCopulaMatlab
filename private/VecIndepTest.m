@@ -85,7 +85,9 @@ S = zeros(N,1);
 R = (V1dotdot - repmat(V1dot,n,1) - repmat(V1dot',1,n) + V1) .* (V2dotdot - repmat(V2dot,n,1) - repmat(V2dot',1,n) + V2);
 
 %xi = randn([n,N]);
-xi = VineCopulaMatlab(1003,n,N);
+SeedState = VineCopulaMatlabSeedState;
+[SeedState,xi] = VineCopulaMatlab(1003,SeedState,n,N);
+VineCopulaMatlabSeedState(SeedState);
 
 for k = 1:N
     S(k) = xi(:,k)'*R*xi(:,k)./n;
