@@ -74,15 +74,15 @@ end
 CheckParameters(family,varargin{1})
 
 if family == 0
-    p = PCPDF(0,u1,u2);
+    p = VineCopulaMatlab(9,0,u1,u2);
 elseif nargin == 5 && not(isempty(varargin{2}))
     if not(isnumeric(varargin{2}))
         Rotations = {'r90','r180','r270'};
         varargin{2} = find(strcmp(varargin{2},Rotations)).*90;
     end
-    p = PCPDF(family,u1,u2,varargin{1},varargin{2});
+    p = VineCopulaMatlab(9,family,u1,u2,varargin{1},varargin{2});
 else
-    p = PCPDF(family,u1,u2,varargin{1});
+    p = VineCopulaMatlab(9,family,u1,u2,varargin{1});
 end
 
 end

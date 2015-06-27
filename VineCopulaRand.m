@@ -156,7 +156,9 @@ CheckParameters(families,thetas)
         rotation = zeros(1,d*(d-1)/2);
     end
     % The simplified case is completely simulated in C++
-    U=VineRand(type,N,d,families,thetas,rotation);
+    SeedState = VineCopulaMatlabSeedState;
+    [SeedState,U] = VineCopulaMatlab(105,SeedState,type,N,d,families,thetas,rotation);
+    VineCopulaMatlabSeedState(SeedState);
 else
     condparameterfunctionals = varargin{2};
     if nargin == 8 && not(isempty(varargin{3}))
@@ -195,28 +197,28 @@ else
                     switch families(i)
                         case {3,4,5,6,12,16,17,19}
                             if rotation(i) == 0
-                                InvvFunctionals{i} = @(u1,u2) PCInvVfun(families(i),u1,u2,thetas(j:j+1));
+                                InvvFunctionals{i} = @(u1,u2) VineCopulaMatlab(7,families(i),u1,u2,thetas(j:j+1));
                             else
-                                InvvFunctionals{i} = @(u1,u2) PCInvVfun(families(i),u1,u2,thetas(j:j+1),rotation(i));
+                                InvvFunctionals{i} = @(u1,u2) VineCopulaMatlab(7,families(i),u1,u2,thetas(j:j+1),rotation(i));
                             end
                             j = j+2;
                             
                         case {18}
                             if rotation(i) == 0
-                                InvvFunctionals{i} = @(u1,u2) PCInvVfun(families(i),u1,u2,thetas(j:j+2));
+                                InvvFunctionals{i} = @(u1,u2) VineCopulaMatlab(7,families(i),u1,u2,thetas(j:j+2));
                             else
-                                InvvFunctionals{i} = @(u1,u2) PCInvVfun(families(i),u1,u2,thetas(j:j+2),rotation(i));
+                                InvvFunctionals{i} = @(u1,u2) VineCopulaMatlab(7,families(i),u1,u2,thetas(j:j+2),rotation(i));
                             end
                             j = j+3;
                             
                         case {0}
-                            InvvFunctionals{i} = @(u1,u2) PCInvVfun(families(i),u1,u2,0);
+                            InvvFunctionals{i} = @(u1,u2) VineCopulaMatlab(7,families(i),u1,u2,0);
                             
                         otherwise
                             if rotation(i) == 0
-                                InvvFunctionals{i} = @(u1,u2) PCInvVfun(families(i),u1,u2,thetas(j));
+                                InvvFunctionals{i} = @(u1,u2) VineCopulaMatlab(7,families(i),u1,u2,thetas(j));
                             else
-                                InvvFunctionals{i} = @(u1,u2) PCInvVfun(families(i),u1,u2,thetas(j),rotation(i));
+                                InvvFunctionals{i} = @(u1,u2) VineCopulaMatlab(7,families(i),u1,u2,thetas(j),rotation(i));
                             end
                             j = j+1;
                             
@@ -231,28 +233,28 @@ else
                         switch families(i)
                             case {3,4,5,6,12,16,17,19}
                                 if rotation(i) == 0
-                                    InvvFunctionals{i} = @(u1,u2) PCInvVfun(families(i),u1,u2,thetas(j:j+1));
+                                    InvvFunctionals{i} = @(u1,u2) VineCopulaMatlab(7,families(i),u1,u2,thetas(j:j+1));
                                 else
-                                    InvvFunctionals{i} = @(u1,u2) PCInvVfun(families(i),u1,u2,thetas(j:j+1),rotation(i));
+                                    InvvFunctionals{i} = @(u1,u2) VineCopulaMatlab(7,families(i),u1,u2,thetas(j:j+1),rotation(i));
                                 end
                                 j = j+2;
                                 
                             case {18}
                                 if rotation(i) == 0
-                                    InvvFunctionals{i} = @(u1,u2) PCInvVfun(families(i),u1,u2,thetas(j:j+2));
+                                    InvvFunctionals{i} = @(u1,u2) VineCopulaMatlab(7,families(i),u1,u2,thetas(j:j+2));
                                 else
-                                    InvvFunctionals{i} = @(u1,u2) PCInvVfun(families(i),u1,u2,thetas(j:j+2),rotation(i));
+                                    InvvFunctionals{i} = @(u1,u2) VineCopulaMatlab(7,families(i),u1,u2,thetas(j:j+2),rotation(i));
                                 end
                                 j = j+3;
                                 
                             case {0}
-                                InvvFunctionals{i} = @(u1,u2) PCInvVfun(families(i),u1,u2,0);
+                                InvvFunctionals{i} = @(u1,u2) VineCopulaMatlab(7,families(i),u1,u2,0);
                                 
                             otherwise
                                 if rotation(i) == 0
-                                    InvvFunctionals{i} = @(u1,u2) PCInvVfun(families(i),u1,u2,thetas(j));
+                                    InvvFunctionals{i} = @(u1,u2) VineCopulaMatlab(7,families(i),u1,u2,thetas(j));
                                 else
-                                    InvvFunctionals{i} = @(u1,u2) PCInvVfun(families(i),u1,u2,thetas(j),rotation(i));
+                                    InvvFunctionals{i} = @(u1,u2) VineCopulaMatlab(7,families(i),u1,u2,thetas(j),rotation(i));
                                 end
                                 j = j+1;
                                 
@@ -261,28 +263,28 @@ else
                         switch families(i)
                             case {3,4,5,6,12,16,17,19}
                                 if rotation(i) == 0
-                                    InvvFunctionals{i} = @(u1,u2,u3) PCInvVfun(families(i),u1,u2,[condparameterfunctionals{k}(u3),condparameterfunctionals{k+1}(u3)]);
+                                    InvvFunctionals{i} = @(u1,u2,u3) VineCopulaMatlab(7,families(i),u1,u2,[condparameterfunctionals{k}(u3),condparameterfunctionals{k+1}(u3)]);
                                 else
-                                    InvvFunctionals{i} = @(u1,u2,u3) PCInvVfun(families(i),u1,u2,[condparameterfunctionals{k}(u3),condparameterfunctionals{k+1}(u3)],rotation(i));
+                                    InvvFunctionals{i} = @(u1,u2,u3) VineCopulaMatlab(7,families(i),u1,u2,[condparameterfunctionals{k}(u3),condparameterfunctionals{k+1}(u3)],rotation(i));
                                 end
                                 k = k+2;
                                 
                             case {18}
                                 if rotation(i) == 0
-                                    InvvFunctionals{i} = @(u1,u2,u3) PCInvVfun(families(i),u1,u2,[condparameterfunctionals{k}(u3),condparameterfunctionals{k+1}(u3),condparameterfunctionals{k+2}(u3)]);
+                                    InvvFunctionals{i} = @(u1,u2,u3) VineCopulaMatlab(7,families(i),u1,u2,[condparameterfunctionals{k}(u3),condparameterfunctionals{k+1}(u3),condparameterfunctionals{k+2}(u3)]);
                                 else
-                                    InvvFunctionals{i} = @(u1,u2,u3) PCInvVfun(families(i),u1,u2,[condparameterfunctionals{k}(u3),condparameterfunctionals{k+1}(u3),condparameterfunctionals{k+2}(u3)],rotation(i));
+                                    InvvFunctionals{i} = @(u1,u2,u3) VineCopulaMatlab(7,families(i),u1,u2,[condparameterfunctionals{k}(u3),condparameterfunctionals{k+1}(u3),condparameterfunctionals{k+2}(u3)],rotation(i));
                                 end
                                 k = k+3;
                                 
                             case {0}
-                                InvvFunctionals{i} = @(u1,u2,u3) PCInvVfun(families(i),u1,u2,0);
+                                InvvFunctionals{i} = @(u1,u2,u3) VineCopulaMatlab(7,families(i),u1,u2,0);
                                 
                             otherwise
                                 if rotation(i) == 0
-                                    InvvFunctionals{i} = @(u1,u2,u3) PCInvVfun(families(i),u1,u2,condparameterfunctionals{k}(u3));
+                                    InvvFunctionals{i} = @(u1,u2,u3) VineCopulaMatlab(7,families(i),u1,u2,condparameterfunctionals{k}(u3));
                                 else
-                                    InvvFunctionals{i} = @(u1,u2,u3) PCInvVfun(families(i),u1,u2,condparameterfunctionals{k}(u3),rotation(i));
+                                    InvvFunctionals{i} = @(u1,u2,u3) VineCopulaMatlab(7,families(i),u1,u2,condparameterfunctionals{k}(u3),rotation(i));
                                 end
                                 k = k+1;
                                 
@@ -310,7 +312,9 @@ else
             % obtained by applying the iterative inversion algorithm for
             % generating pseudo-random variables.
             k = 2;
-            W = RandUniform(N,d);
+            SeedState = VineCopulaMatlabSeedState;
+            [SeedState,W] = VineCopulaMatlab(1004,SeedState,N,d);
+            VineCopulaMatlabSeedState(SeedState);
             U(:,1) = W(:,1);
             U(:,2) = InvvFunctionals{1}(W(:,1),W(:,2));
             for i = 3:d
@@ -343,35 +347,35 @@ else
                     switch families(i)
                         case {3,4,5,6,12,16,17,19}
                             if rotation(i) == 0
-                                InvvFunctionals{i} = @(u1,u2) PCInvVfun(families(i),u1,u2,thetas(j:j+1));
-                                hFunctionals{i} = @(u1,u2) PCHfun(families(i),u1,u2,thetas(j:j+1));
+                                InvvFunctionals{i} = @(u1,u2) VineCopulaMatlab(7,families(i),u1,u2,thetas(j:j+1));
+                                hFunctionals{i} = @(u1,u2) VineCopulaMatlab(4,families(i),u1,u2,thetas(j:j+1));
                             else
-                                InvvFunctionals{i} = @(u1,u2) PCInvVfun(families(i),u1,u2,thetas(j:j+1),rotation(i));
-                                hFunctionals{i} = @(u1,u2) PCHfun(families(i),u1,u2,thetas(j:j+1),rotation(i));
+                                InvvFunctionals{i} = @(u1,u2) VineCopulaMatlab(7,families(i),u1,u2,thetas(j:j+1),rotation(i));
+                                hFunctionals{i} = @(u1,u2) VineCopulaMatlab(4,families(i),u1,u2,thetas(j:j+1),rotation(i));
                             end
                             j = j+2;
                             
                         case {18}
                             if rotation(i) == 0
-                                InvvFunctionals{i} = @(u1,u2) PCInvVfun(families(i),u1,u2,thetas(j:j+2));
-                                hFunctionals{i} = @(u1,u2) PCHfun(families(i),u1,u2,thetas(j:j+2));
+                                InvvFunctionals{i} = @(u1,u2) VineCopulaMatlab(7,families(i),u1,u2,thetas(j:j+2));
+                                hFunctionals{i} = @(u1,u2) VineCopulaMatlab(4,families(i),u1,u2,thetas(j:j+2));
                             else
-                                InvvFunctionals{i} = @(u1,u2) PCInvVfun(families(i),u1,u2,thetas(j:j+2),rotation(i));
-                                hFunctionals{i} = @(u1,u2) PCHfun(families(i),u1,u2,thetas(j:j+2),rotation(i));
+                                InvvFunctionals{i} = @(u1,u2) VineCopulaMatlab(7,families(i),u1,u2,thetas(j:j+2),rotation(i));
+                                hFunctionals{i} = @(u1,u2) VineCopulaMatlab(4,families(i),u1,u2,thetas(j:j+2),rotation(i));
                             end
                             j = j+3;
                             
                         case {0}
-                            InvvFunctionals{i} = @(u1,u2) PCInvVfun(families(i),u1,u2,0);
-                            hFunctionals{i} = @(u1,u2) PCHfun(families(i),u1,u2,0);
+                            InvvFunctionals{i} = @(u1,u2) VineCopulaMatlab(7,families(i),u1,u2,0);
+                            hFunctionals{i} = @(u1,u2) VineCopulaMatlab(4,families(i),u1,u2,0);
                             
                         otherwise
                             if rotation(i) == 0
-                                InvvFunctionals{i} = @(u1,u2) PCInvVfun(families(i),u1,u2,thetas(j));
-                                hFunctionals{i} = @(u1,u2) PCHfun(families(i),u1,u2,thetas(j));
+                                InvvFunctionals{i} = @(u1,u2) VineCopulaMatlab(7,families(i),u1,u2,thetas(j));
+                                hFunctionals{i} = @(u1,u2) VineCopulaMatlab(4,families(i),u1,u2,thetas(j));
                             else
-                                InvvFunctionals{i} = @(u1,u2) PCInvVfun(families(i),u1,u2,thetas(j),rotation(i));
-                                hFunctionals{i} = @(u1,u2) PCHfun(families(i),u1,u2,thetas(j),rotation(i));
+                                InvvFunctionals{i} = @(u1,u2) VineCopulaMatlab(7,families(i),u1,u2,thetas(j),rotation(i));
+                                hFunctionals{i} = @(u1,u2) VineCopulaMatlab(4,families(i),u1,u2,thetas(j),rotation(i));
                             end
                             j = j+1;
                             
@@ -386,35 +390,35 @@ else
                         switch families(i)
                             case {3,4,5,6,12,16,17,19}
                                 if rotation(i) == 0
-                                    InvvFunctionals{i} = @(u1,u2) PCInvVfun(families(i),u1,u2,thetas(j:j+1));
-                                    hFunctionals{i} = @(u1,u2) PCHfun(families(i),u1,u2,thetas(j:j+1));
+                                    InvvFunctionals{i} = @(u1,u2) VineCopulaMatlab(7,families(i),u1,u2,thetas(j:j+1));
+                                    hFunctionals{i} = @(u1,u2) VineCopulaMatlab(4,families(i),u1,u2,thetas(j:j+1));
                                 else
-                                    InvvFunctionals{i} = @(u1,u2) PCInvVfun(families(i),u1,u2,thetas(j:j+1),rotation(i));
-                                    hFunctionals{i} = @(u1,u2) PCHfun(families(i),u1,u2,thetas(j:j+1),rotation(i));
+                                    InvvFunctionals{i} = @(u1,u2) VineCopulaMatlab(7,families(i),u1,u2,thetas(j:j+1),rotation(i));
+                                    hFunctionals{i} = @(u1,u2) VineCopulaMatlab(4,families(i),u1,u2,thetas(j:j+1),rotation(i));
                                 end
                                 j = j+2;
                                 
                             case {18}
                                 if rotation(i) == 0
-                                    InvvFunctionals{i} = @(u1,u2) PCInvVfun(families(i),u1,u2,thetas(j:j+2));
-                                    hFunctionals{i} = @(u1,u2) PCHfun(families(i),u1,u2,thetas(j:j+2));
+                                    InvvFunctionals{i} = @(u1,u2) VineCopulaMatlab(7,families(i),u1,u2,thetas(j:j+2));
+                                    hFunctionals{i} = @(u1,u2) VineCopulaMatlab(4,families(i),u1,u2,thetas(j:j+2));
                                 else
-                                    InvvFunctionals{i} = @(u1,u2) PCInvVfun(families(i),u1,u2,thetas(j:j+2),rotation(i));
-                                    hFunctionals{i} = @(u1,u2) PCHfun(families(i),u1,u2,thetas(j:j+2),rotation(i));
+                                    InvvFunctionals{i} = @(u1,u2) VineCopulaMatlab(7,families(i),u1,u2,thetas(j:j+2),rotation(i));
+                                    hFunctionals{i} = @(u1,u2) VineCopulaMatlab(4,families(i),u1,u2,thetas(j:j+2),rotation(i));
                                 end
                                 j = j+3;
                                 
                             case {0}
-                                InvvFunctionals{i} = @(u1,u2) PCInvVfun(families(i),u1,u2,0);
-                                hFunctionals{i} = @(u1,u2) PCHfun(families(i),u1,u2,0);
+                                InvvFunctionals{i} = @(u1,u2) VineCopulaMatlab(7,families(i),u1,u2,0);
+                                hFunctionals{i} = @(u1,u2) VineCopulaMatlab(4,families(i),u1,u2,0);
                                 
                             otherwise
                                 if rotation(i) == 0
-                                    InvvFunctionals{i} = @(u1,u2) PCInvVfun(families(i),u1,u2,thetas(j));
-                                    hFunctionals{i} = @(u1,u2) PCHfun(families(i),u1,u2,thetas(j));
+                                    InvvFunctionals{i} = @(u1,u2) VineCopulaMatlab(7,families(i),u1,u2,thetas(j));
+                                    hFunctionals{i} = @(u1,u2) VineCopulaMatlab(4,families(i),u1,u2,thetas(j));
                                 else
-                                    InvvFunctionals{i} = @(u1,u2) PCInvVfun(families(i),u1,u2,thetas(j),rotation(i));
-                                    hFunctionals{i} = @(u1,u2) PCHfun(families(i),u1,u2,thetas(j),rotation(i));
+                                    InvvFunctionals{i} = @(u1,u2) VineCopulaMatlab(7,families(i),u1,u2,thetas(j),rotation(i));
+                                    hFunctionals{i} = @(u1,u2) VineCopulaMatlab(4,families(i),u1,u2,thetas(j),rotation(i));
                                 end
                                 j = j+1;
                                 
@@ -423,35 +427,35 @@ else
                         switch families(i)
                             case {3,4,5,6,12,16,17,19}
                                 if rotation(i) == 0
-                                    InvvFunctionals{i} = @(u1,u2,u3) PCInvVfun(families(i),u1,u2,[condparameterfunctionals{k}(u3),condparameterfunctionals{k+1}(u3)]);
-                                    hFunctionals{i} = @(u1,u2,u3) PCHfun(families(i),u1,u2,[condparameterfunctionals{k}(u3),condparameterfunctionals{k+1}(u3)]);
+                                    InvvFunctionals{i} = @(u1,u2,u3) VineCopulaMatlab(7,families(i),u1,u2,[condparameterfunctionals{k}(u3),condparameterfunctionals{k+1}(u3)]);
+                                    hFunctionals{i} = @(u1,u2,u3) VineCopulaMatlab(4,families(i),u1,u2,[condparameterfunctionals{k}(u3),condparameterfunctionals{k+1}(u3)]);
                                 else
-                                    InvvFunctionals{i} = @(u1,u2,u3) PCInvVfun(families(i),u1,u2,[condparameterfunctionals{k}(u3),condparameterfunctionals{k+1}(u3)],rotation(i));
-                                    hFunctionals{i} = @(u1,u2,u3) PCHfun(families(i),u1,u2,[condparameterfunctionals{k}(u3),condparameterfunctionals{k+1}(u3)],rotation(i));
+                                    InvvFunctionals{i} = @(u1,u2,u3) VineCopulaMatlab(7,families(i),u1,u2,[condparameterfunctionals{k}(u3),condparameterfunctionals{k+1}(u3)],rotation(i));
+                                    hFunctionals{i} = @(u1,u2,u3) VineCopulaMatlab(4,families(i),u1,u2,[condparameterfunctionals{k}(u3),condparameterfunctionals{k+1}(u3)],rotation(i));
                                 end
                                 k = k+2;
                                 
                             case {18}
                                 if rotation(i) == 0
-                                    InvvFunctionals{i} = @(u1,u2,u3) PCInvVfun(families(i),u1,u2,[condparameterfunctionals{k}(u3),condparameterfunctionals{k+1}(u3),condparameterfunctionals{k+2}(u3)]);
-                                    hFunctionals{i} = @(u1,u2,u3) PCHfun(families(i),u1,u2,[condparameterfunctionals{k}(u3),condparameterfunctionals{k+1}(u3),condparameterfunctionals{k+2}(u3)]);
+                                    InvvFunctionals{i} = @(u1,u2,u3) VineCopulaMatlab(7,families(i),u1,u2,[condparameterfunctionals{k}(u3),condparameterfunctionals{k+1}(u3),condparameterfunctionals{k+2}(u3)]);
+                                    hFunctionals{i} = @(u1,u2,u3) VineCopulaMatlab(4,families(i),u1,u2,[condparameterfunctionals{k}(u3),condparameterfunctionals{k+1}(u3),condparameterfunctionals{k+2}(u3)]);
                                 else
-                                    InvvFunctionals{i} = @(u1,u2,u3) PCInvVfun(families(i),u1,u2,[condparameterfunctionals{k}(u3),condparameterfunctionals{k+1}(u3),condparameterfunctionals{k+2}(u3)],rotation(i));
-                                    hFunctionals{i} = @(u1,u2,u3) PCHfun(families(i),u1,u2,[condparameterfunctionals{k}(u3),condparameterfunctionals{k+1}(u3),condparameterfunctionals{k+2}(u3)],rotation(i));
+                                    InvvFunctionals{i} = @(u1,u2,u3) VineCopulaMatlab(7,families(i),u1,u2,[condparameterfunctionals{k}(u3),condparameterfunctionals{k+1}(u3),condparameterfunctionals{k+2}(u3)],rotation(i));
+                                    hFunctionals{i} = @(u1,u2,u3) VineCopulaMatlab(4,families(i),u1,u2,[condparameterfunctionals{k}(u3),condparameterfunctionals{k+1}(u3),condparameterfunctionals{k+2}(u3)],rotation(i));
                                 end
                                 k = k+3;
                                 
                             case {0}
-                                InvvFunctionals{i} = @(u1,u2,u3) PCInvVfun(families(i),u1,u2,0);
-                                hFunctionals{i} = @(u1,u2,u3) PCHfun(families(i),u1,u2,0);
+                                InvvFunctionals{i} = @(u1,u2,u3) VineCopulaMatlab(7,families(i),u1,u2,0);
+                                hFunctionals{i} = @(u1,u2,u3) VineCopulaMatlab(4,families(i),u1,u2,0);
                                 
                             otherwise
                                 if rotation(i) == 0
-                                    InvvFunctionals{i} = @(u1,u2,u3) PCInvVfun(families(i),u1,u2,condparameterfunctionals{k}(u3));
-                                    hFunctionals{i} = @(u1,u2,u3) PCHfun(families(i),u1,u2,condparameterfunctionals{k}(u3));
+                                    InvvFunctionals{i} = @(u1,u2,u3) VineCopulaMatlab(7,families(i),u1,u2,condparameterfunctionals{k}(u3));
+                                    hFunctionals{i} = @(u1,u2,u3) VineCopulaMatlab(4,families(i),u1,u2,condparameterfunctionals{k}(u3));
                                 else
-                                    InvvFunctionals{i} = @(u1,u2,u3) PCInvVfun(families(i),u1,u2,condparameterfunctionals{k}(u3),rotation(i));
-                                    hFunctionals{i} = @(u1,u2,u3) PCHfun(families(i),u1,u2,condparameterfunctionals{k}(u3),rotation(i));
+                                    InvvFunctionals{i} = @(u1,u2,u3) VineCopulaMatlab(7,families(i),u1,u2,condparameterfunctionals{k}(u3),rotation(i));
+                                    hFunctionals{i} = @(u1,u2,u3) VineCopulaMatlab(4,families(i),u1,u2,condparameterfunctionals{k}(u3),rotation(i));
                                 end
                                 k = k+1;
                                 
@@ -483,7 +487,9 @@ else
             % generating pseudo-random variables.
             v = 1;
             h = 1;
-            W = RandUniform(N,d);
+            SeedState = VineCopulaMatlabSeedState;
+            [SeedState,W] = VineCopulaMatlab(1004,SeedState,N,d);
+            VineCopulaMatlabSeedState(SeedState);
             A = zeros(N,d,d);
             B = zeros(N,d,d);
             U(:,1) = W(:,1);

@@ -12,6 +12,9 @@
 % simplifying assumption can be tested with a sequential approach, based
 % on a statistical tests on vectorial independencies.
 
+%% Set a seed
+VineCopulaMatlabSetSeed(3141);
+
 %% Simulating possibly non-simplified vine copulas
 %
 % In the following three different data generating processes will be used

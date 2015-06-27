@@ -91,7 +91,6 @@ else
     familyset = varargin{1};
 end
 
-
 if not(iscell(familyset))
     switch familyset
         case {'all'}
@@ -108,6 +107,9 @@ if not(iscell(familyset))
     end
 end
 
-[family,ParamHat,rotation] = PCSelect(u1,u2,families);
+% Obtain parameter bounds
+bounds = GlobalPairCopulaParameterBounds';   
+
+[family,ParamHat,rotation] = VineCopulaMatlab(11,bounds,u1,u2,families);
 
 end

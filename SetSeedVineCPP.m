@@ -24,6 +24,6 @@ function SetSeedVineCPP
 %
 % Author: Malte Kurz
 
-SetSeed;
+VineCopulaMatlab(1005);
 
 end

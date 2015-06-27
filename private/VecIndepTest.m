@@ -80,12 +80,14 @@ end
 [n,~] = size(U);
 S = zeros(N,1);
 
-[TestStat,V1,V2,V1dot,V2dot,V1dotdot,V2dotdot] = CvMTestStatCPP(U,V);
+[TestStat,V1,V2,V1dot,V2dot,V1dotdot,V2dotdot] = VineCopulaMatlab(1001,U,V);
 
 R = (V1dotdot - repmat(V1dot,n,1) - repmat(V1dot',1,n) + V1) .* (V2dotdot - repmat(V2dot,n,1) - repmat(V2dot',1,n) + V2);
 
 %xi = randn([n,N]);
-xi = RandNormal(n,N);
+SeedState = VineCopulaMatlabSeedState;
+[SeedState,xi] = VineCopulaMatlab(1003,SeedState,n,N);
+VineCopulaMatlabSeedState(SeedState);
 
 for k = 1:N
     S(k) = xi(:,k)'*R*xi(:,k)./n;

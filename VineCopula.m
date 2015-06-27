@@ -1410,6 +1410,9 @@ classdef VineCopula < matlab.mixin.CustomDisplay
             % Check the (Copula-)data input.
             CheckData(data)
             
+            % Obtain parameter bounds
+            bounds = GlobalPairCopulaParameterBounds';
+            
             switch obj.type
                 case 0
                     narginchk(2,4)
@@ -1488,7 +1491,7 @@ classdef VineCopula < matlab.mixin.CustomDisplay
                         StructuringRule = 0;
                     end
                     
-                    [structure,families(1,:),families(2,:),parameters]=VineStructureSelect(0,data,StructuringRule,Familyset);
+                    [structure,families(1,:),families(2,:),parameters]=VineCopulaMatlab(106,bounds,0,data,StructuringRule,Familyset);
                     structure = structure + 1;
                     
                     if sum(obj.simplified==0) > 0
@@ -1540,7 +1543,7 @@ classdef VineCopula < matlab.mixin.CustomDisplay
                         obj.structure = 1:d;
                     end
                     
-                    [~,families(1,:),families(2,:),parameters]=VineStructureSelect(1,data(:,obj.structure),0,Familyset);
+                    [~,families(1,:),families(2,:),parameters]=VineCopulaMatlab(106,bounds,1,data(:,obj.structure),0,Familyset);
                     
                     if sum(obj.simplified==0) > 0
                         warning('VineCopula:StructureSelect','The vine copula structue has been selected and estimated as a simplified vine copula.')
@@ -1783,20 +1786,20 @@ classdef VineCopula < matlab.mixin.CustomDisplay
                 fams = obj.families;
                 switch obj.type
                     case 0
-                        U = VineGetPseudoObs(obj.type,u,fams,thetas);
+                        U = VineCopulaMatlab(103,obj.type,u,fams,thetas);
                     case 1
                         U = zeros(size(u,1),(d-2)*(d-1)/2,2);
-                        [U(:,:,1),U(:,:,2)] = VineGetPseudoObs(obj.type,u,fams,thetas);
+                        [U(:,:,1),U(:,:,2)] = VineCopulaMatlab(103,obj.type,u,fams,thetas);
                 end
             elseif size(obj.families,1) == 2
                 fams = obj.families(1,1:end);
                 rotation = obj.families(2,:);
                 switch obj.type
                     case 0
-                        U = VineGetPseudoObs(obj.type,u,fams,thetas,rotation);
+                        U = VineCopulaMatlab(103,obj.type,u,fams,thetas,rotation);
                     case 1
                         U = zeros(size(u,1),(d-2)*(d-1)/2,2);
-                        [U(:,:,1),U(:,:,2)] = VineGetPseudoObs(obj.type,u,fams,thetas,rotation);
+                        [U(:,:,1),U(:,:,2)] = VineCopulaMatlab(103,obj.type,u,fams,thetas,rotation);
                 end
             end
             
