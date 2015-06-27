@@ -76,7 +76,7 @@ InstallLibrary:
 install: InstallLibrary $(OperatingSystem)CompileMatlabMex
 
 WindowsCompileMatlabMex:
-	matlab -wait -nodisplay -nodesktop -nosplash -r "mingwroot = '`echo $(mingwroot)`';mingw_mex_xml = '`echo $(mingw_mex_xml)`';libdir = '`echo $(libdir)`';IncludeDirs = '`echo ${INCLUDE_DIRS}`';LibDirs = '`echo ${LIB_DIRS}`';cd('`$(currentdir)`/private'); installVineCopulaMatlab(libdir,IncludeDirs,LibDirs); exit"
+	matlab -wait -nodisplay -nodesktop -nosplash -r "mingwroot = '`echo $(mingwroot)`';mingw_mex_xml = '`echo $(mingw_mex_xml)`';libdir = '`echo $(libdir)`';IncludeDirs = '`echo ${INCLUDE_DIRS}`';LibDirs = '`echo ${LIB_DIRS}`';cd('`$(currentdir)`/private'); installVineCopulaMatlab(libdir,IncludeDirs,LibDirs,mingwroot,mingw_mex_xml); exit"
 
 LinuxCompileMatlabMex:
 	matlab -nodesktop -nosplash -r "libdir = '`echo $(libdir)`';IncludeDirs = '`echo ${INCLUDE_DIRS}`';LibDirs = '`echo ${LIB_DIRS}`';cd('`$(currentdir)`/private'); installVineCopulaMatlab(libdir,IncludeDirs,LibDirs); exit"
