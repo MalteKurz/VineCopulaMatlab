@@ -45,6 +45,9 @@ for i = 1:NumbPCs
     switch families(i)
         case {3,4,5,6,12,16,17,19}
             [lb,ub] = PairCopulaParameterBounds(families(i));
+            lb = lb -10^4*eps;
+            ub = ub +10^4*eps;
+                
             for j=1:2
                 if sum(theta(k) < lb(j)) > 0 || sum(theta(k) > ub(j)) > 0
                     throwAsCaller(MException('',['The ' num2str(j) '. parameter of copula family number ' num2str(families(i)) ' has to lie between ' num2str(lb(j)) ' and ' num2str(ub(j)) '.']))
@@ -54,6 +57,8 @@ for i = 1:NumbPCs
             
         case {18}
             [lb,ub] = PairCopulaParameterBounds(families(i));
+            lb = lb -10^4*eps;
+            ub = ub +10^4*eps;
             for j=1:3
                 if sum(theta(k) < lb(j)) > 0 || sum(theta(k) > ub(j)) > 0
                     throwAsCaller(MException('',['The ' num2str(j) '. parameter of copula family number ' num2str(families(i)) ' has to lie between ' num2str(lb(j)) ' and ' num2str(ub(j)) '.']))
@@ -65,6 +70,8 @@ for i = 1:NumbPCs
             
         otherwise
             [lb,ub] = PairCopulaParameterBounds(families(i));
+            lb = lb -10^4*eps;
+            ub = ub +10^4*eps;
             if sum(theta(k) < lb) > 0 || sum(theta(k) > ub) > 0
                 throwAsCaller(MException('',['The 1. parameter of copula family number ' num2str(families(i)) ' has to lie between ' num2str(lb) ' and ' num2str(ub) '.']))
             end

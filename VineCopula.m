@@ -494,12 +494,17 @@ classdef VineCopula < matlab.mixin.CustomDisplay
                 m = length(families);
                 
                 [lb,ub] = PairCopulaParameterBounds(families);
+                lb = lb -10^4*eps;
+                ub = ub +10^4*eps;
                 
                 if sum(parametersVec < lb) || sum(parametersVec > ub)
                     k = 1;
                     for i = 1:m
                         if not(families(1,i)==0)
                             [lb,ub] = PairCopulaParameterBounds(families(1,i));
+                            lb = lb -10^4*eps;
+                            ub = ub +10^4*eps;
+                            
                             for j = 1:length(lb)
                                 if parametersVec(k) < lb(j) || parametersVec(k) > ub(j)
                                     error(['The ' num2str(j) '. parameter of the ' Families{families(1,i)+1} ' copula has to lie between ' num2str(lb(j)) ' and ' num2str(ub(j)) '.'])
@@ -585,6 +590,9 @@ classdef VineCopula < matlab.mixin.CustomDisplay
             for i = 1:(d-1)*(d-2)/2
                 if obj.simplified(i)==0
                     [lb,ub] = PairCopulaParameterBounds(obj.families(1,i+d-1));
+                    lb = lb -10^4*eps;
+                    ub = ub +10^4*eps;
+                    
                     for j = 1:length(lb)
                         condparameters = condparameterfunctionalsVec{k}(rand(500,sum(((d-1)*(d-2)/2-i)<tri)));
                         if sum(condparameters < lb(j)) > 0 || sum(condparameters > ub(j)) > 0
@@ -979,6 +987,8 @@ classdef VineCopula < matlab.mixin.CustomDisplay
                 m = length(families);
                 
                 [lb,ub] = PairCopulaParameterBounds(families);
+                lb = lb -10^4*eps;
+                ub = ub +10^4*eps;
                 
                 if isempty(parameters)
                     if not(length(families(1,:)) == sum(families(1,:)==0))
@@ -990,6 +1000,9 @@ classdef VineCopula < matlab.mixin.CustomDisplay
                         for i = 1:m
                             if not(families(1,i)==0)
                                 [lb,ub] = PairCopulaParameterBounds(families(1,i));
+                                lb = lb -10^4*eps;
+                                ub = ub +10^4*eps;
+                                
                                 for j = 1:length(lb)
                                     if parameters(k) < lb(j) || parameters(k) > ub(j)
                                         warning('VineCopula:ChangeOfOtherPropertyNeeded',['The ' num2str(j) '. parameter of the ' Families{obj.families(1,i)+1} ' copula has to lie between ' num2str(lb(j)) ' and ' num2str(ub(j)) '.'])
@@ -1032,6 +1045,9 @@ classdef VineCopula < matlab.mixin.CustomDisplay
                 for i = 1:(d-1)*(d-2)/2
                     if obj.simplified(i)==0
                         [lb,ub] = PairCopulaParameterBounds(obj.families(1,i+d-1));
+                        lb = lb -10^4*eps;
+                        ub = ub +10^4*eps;
+                        
                         for j = 1:length(lb)
                             condparameters = condparameterfunctionals{k}(rand(500,sum(((d-1)*(d-2)/2-i)<tri)));
                             if sum(condparameters < lb(j)) > 0 || sum(condparameters > ub(j)) > 0
