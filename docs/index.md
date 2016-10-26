@@ -71,33 +71,29 @@ Please see the [demo](DemoVineCPP.md) for further details about the functionalit
 
  [15] Kurowicka, D. and H. Joe (Eds.) (2011), "Dependece Modeling -- Vine Copula Handbook", Singapore: World Scientific Publishing Co. Pte. Ltd.
 
- [16] Kurz, M. (2012), "On the simplified pair-copula construction -- Graphical and computational illustrations", Unpublished Term Paper, Master Seminar on Financial Econometrics, Department of Statistics, Ludwig-Maximilians-University Munich.
+ [16] Nelsen, R. B. (2006), "An introduction to copulas", 2. ed., Springer series instatistics, New York, NY: Springer.
 
- [17] Kurz, M. (2013), "Tests on the partial copula", Unpublished Master's Thesis, Department of Statistics, Ludwig-Maximilians-University Munich.
+ [17] Omelka, M. and M. Pauly (2012), "Testing equality of correlation coefficients in two populations via permutation methods, Journal of Statistical Planning and Inference 142, pp. 1396-1406.
 
- [18] Nelsen, R. B. (2006), "An introduction to copulas", 2. ed., Springer series instatistics, New York, NY: Springer.
+ [18] Patton, A. J. (2002), "Applications of Copula Theory in Financial Econometrics", Unpublished Ph.D. dissertation, University of Colifornia, San Diego, url: http://www.amstat.org/sections/bus_econ/papers/patton_dissertation.pdf.
 
- [19] Omelka, M. and M. Pauly (2012), "Testing equality of correlation coefficients in two populations via permutation methods, Journal of Statistical Planning and Inference 142, pp. 1396-1406.
+ [19] Patton, A. J. (2006), "Modelling asymmetric exchange rate dependence", International Economic Review 47(2), pp. 527-556.
 
- [20] Patton, A. J. (2002), "Applications of Copula Theory in Financial Econometrics", Unpublished Ph.D. dissertation, University of Colifornia, San Diego, url: http://www.amstat.org/sections/bus_econ/papers/patton_dissertation.pdf.
+ [20] Quessy, J.-F. (2010), "Applications and asymptotic power of marginal-free tests of stochastic vectorial independence", Journal of Statistical Planning and Inference 140(11), pp. 3058-3075.
 
- [21] Patton, A. J. (2006), "Modelling asymmetric exchange rate dependence", International Economic Review 47(2), pp. 527-556.
+ [21] Rémillard, B. (2013), "Statistical Methods For Financial Engineering", Boca Raton, FL: Chapman & Hall.
 
- [22] Quessy, J.-F. (2010), "Applications and asymptotic power of marginal-free tests of stochastic vectorial independence", Journal of Statistical Planning and Inference 140(11), pp. 3058-3075.
+ [22] Rémillard, B. and O. Scaillet (2009), "Testing for equality between two copulas", Journal of Multivariate Analysis 100(3), pp. 377-386.
 
- [23] Rémillard, B. (2013), "Statistical Methods For Financial Engineering", Boca Raton, FL: Chapman & Hall.
+ [23] Schepsmeier, U., J. Stöber and E. C. Brechmann (2013), VineCopula: Statistical inference of vine copulas, R package version 1.2, url: http://CRAN.R-project.org/package=VineCopula.
 
- [24] Rémillard, B. and O. Scaillet (2009), "Testing for equality between two copulas", Journal of Multivariate Analysis 100(3), pp. 377-386.
-
- [25] Schepsmeier, U., J. Stöber and E. C. Brechmann (2013), VineCopula: Statistical inference of vine copulas, R package version 1.2, url: http://CRAN.R-project.org/package=VineCopula.
-
- [26] Segers, J. (2012), "Asymptotics of empirical copula processes under non-restrictive smoothness assumptions", Bernoulli 18(3), pp. 764-782.
+ [24] Segers, J. (2012), "Asymptotics of empirical copula processes under non-restrictive smoothness assumptions", Bernoulli 18(3), pp. 764-782.
  
- [27] Spanhel, F. and M. Kurz (2014), "Simplified vine copula approximations -- Properties and consequences", submitted for publication. 
+ [25] Spanhel, F., Kurz, M.S., 2015. Simplified vine copula models: Approximations based on the simplifying assumption. ArXiv e-prints https://arxiv.org/abs/1510.06971.
 
- [28] Stöber, J., H. Joe and C. Czado (2013), "Simplified pair copula constructions -- Limitations and extensions", Journal of Multivariate Analysis 119, pp. 101-118.
+ [26] Stöber, J., H. Joe and C. Czado (2013), "Simplified pair copula constructions -- Limitations and extensions", Journal of Multivariate Analysis 119, pp. 101-118.
 
- [29] van der Vaart, A. W. and J. A. Wellner (1996), Weak Convergence and Empirical Processes -- With Applications to Statistics, Springer Series in Statistics, New York [u.a.]: Springer.
+ [27] van der Vaart, A. W. and J. A. Wellner (1996), Weak Convergence and Empirical Processes -- With Applications to Statistics, Springer Series in Statistics, New York [u.a.]: Springer.
 
 
 ___________________________________________________________________________
